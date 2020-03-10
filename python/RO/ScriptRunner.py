@@ -246,8 +246,8 @@ class ScriptRunner(RO.AddCallback.BaseMixin):
           which is needlessly inefficient.
         """
         if self.master:
-            import tkinter
-            self._privateWdg = tkinter.Frame(self.master)
+            import Tkinter
+            self._privateWdg = Tkinter.Frame(self.master)
             self._privateWdg.bind("<Destroy>", self.__del__)
 
         if stateFunc:
@@ -1198,11 +1198,11 @@ class _WaitThread(_WaitBase):
 
 
 if __name__ == "__main__":
-    import tkinter
+    import Tkinter
     import RO.KeyDispatcher
     import time
 
-    root = tkinter.Tk()
+    root = Tkinter.Tk()
     
     dispatcher = RO.KeyDispatcher.KeyDispatcher()
     

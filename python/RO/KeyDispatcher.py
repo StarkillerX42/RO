@@ -687,8 +687,8 @@ class KeyDispatcher(object):
 
 if __name__ == "__main__":
     print("\nTesting RO.KeyDispatcher\n")
-    import tkinter
-    root = tkinter.Tk()
+    import Tkinter
+    root = Tkinter.Tk()
 
     kdb = KeyDispatcher()
 

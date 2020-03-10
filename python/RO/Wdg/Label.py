@@ -56,7 +56,7 @@ History:
 __all__ = ['Label', 'BoolLabel', 'StrLabel', 'IntLabel', 'FloatLabel', 'DMSLabel']
 
 import sys
-import tkinter
+import Tkinter
 import RO.Constants
 import RO.MathUtil
 import RO.StringUtil
@@ -64,7 +64,7 @@ from .CtxMenu import CtxMenu, CtxMenuMixin
 from .SeverityMixin import SeverityMixin
 from .IsCurrentMixin import IsCurrentMixin
 
-class Label(tkinter.Label, CtxMenuMixin, IsCurrentMixin, SeverityMixin):
+class Label(Tkinter.Label, CtxMenuMixin, IsCurrentMixin, SeverityMixin):
     """Base class for labels (display ROWdgs); do not use directly.
     
     Inputs:
@@ -99,7 +99,7 @@ class Label(tkinter.Label, CtxMenuMixin, IsCurrentMixin, SeverityMixin):
         kargs.setdefault("anchor", "e")
         kargs.setdefault("justify", "right")
         
-        tkinter.Label.__init__(self, master, **kargs)
+        Tkinter.Label.__init__(self, master, **kargs)
         
         CtxMenuMixin.__init__(self, helpURL=helpURL)
         
@@ -393,7 +393,7 @@ if __name__ == "__main__":
         ),
     )
     for wdg in wdgSet:
-        wdg.pack(fill=tkinter.X)
+        wdg.pack(fill=Tkinter.X)
     
     # a list of (value, isCurrent) pairs
     testData = [

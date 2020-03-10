@@ -34,7 +34,7 @@ History:
 __all__ = ['BasicScriptWdg', 'ScriptModuleWdg', 'ScriptFileWdg']
 
 import os.path
-import tkinter
+import Tkinter
 import RO.Constants
 import RO.AddCallback
 import RO.ScriptRunner
@@ -232,7 +232,7 @@ class BasicScriptWdg(RO.AddCallback.BaseMixin):
         self._basicDoCallbacks(self.scriptRunner)
 
 
-class _BaseUserScriptWdg(tkinter.Frame, BasicScriptWdg):
+class _BaseUserScriptWdg(Tkinter.Frame, BasicScriptWdg):
     """Base class widget that runs a function via a ScriptRunner.
     
     Subclasses must override _getScriptFuncs.
@@ -249,7 +249,7 @@ class _BaseUserScriptWdg(tkinter.Frame, BasicScriptWdg):
         name,
         dispatcher = None,
     **kargs):
-        tkinter.Frame.__init__(self, master, **kargs)
+        Tkinter.Frame.__init__(self, master, **kargs)
 
         
         srArgs = self._getScriptFuncs(isFirst=True)
@@ -257,7 +257,7 @@ class _BaseUserScriptWdg(tkinter.Frame, BasicScriptWdg):
 
         row = 0
         
-        self.scriptFrame = tkinter.Frame(self)
+        self.scriptFrame = Tkinter.Frame(self)
         self.scriptFrame.grid(row=row, column=0, sticky="news")
         self.scriptFrameRow = row
         self.rowconfigure(row, weight=1)
@@ -282,7 +282,7 @@ class _BaseUserScriptWdg(tkinter.Frame, BasicScriptWdg):
         cmdStatusBar.grid(row=row, column=0, sticky="ew")
         row += 1
         
-        buttonFrame = tkinter.Frame(self)
+        buttonFrame = Tkinter.Frame(self)
         startButton = Button.Button(
             master = buttonFrame,
             text = "Start",
@@ -339,7 +339,7 @@ class _BaseUserScriptWdg(tkinter.Frame, BasicScriptWdg):
             self.scriptFrame.destroy()
             self.scriptRunner = None
     
-            self.scriptFrame = tkinter.Frame(self)
+            self.scriptFrame = Tkinter.Frame(self)
             self.scriptFrame.grid(row=self.scriptFrameRow, column=0, sticky="news")
             self._makeScriptRunner(self.scriptFrame, **srArgs)
             self.scriptStatusBar.setMsg("Reloaded", RO.Constants.sevNormal)
@@ -559,7 +559,7 @@ if __name__ == "__main__":
     testTL1.resizable(False, False)
 
     
-    testTL2 = tkinter.Toplevel()
+    testTL2 = Tkinter.Toplevel()
     sr2 = ScriptFileWdg(
         master = testTL2,
         filename = 'TestScriptWdg.py',

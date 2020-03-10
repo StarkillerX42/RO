@@ -69,7 +69,7 @@ import json
 import os.path
 import sys
 import traceback
-import tkinter
+import Tkinter
 import RO.CnvUtil
 import RO.OS
 import RO.SeqUtil
@@ -81,7 +81,7 @@ tl_CloseDestroys = 0
 tl_CloseWithdraws = 1
 tl_CloseDisabled = 2
 
-class Toplevel(tkinter.Toplevel):
+class Toplevel(Tkinter.Toplevel):
     def __init__(self,
         master=None,
         geometry="",
@@ -123,7 +123,7 @@ class Toplevel(tkinter.Toplevel):
         An alternative solution is to create a variant of GenericCallback that
         is specialized for Tk widgets or at least puts unnamed dynamic arguments first.
         """
-        tkinter.Toplevel.__init__(self, master)
+        Tkinter.Toplevel.__init__(self, master)
         self.wm_withdraw()
         
         resizable = RO.SeqUtil.oneOrNAsList(resizable, 2, valDescr = "resizable")
@@ -679,7 +679,7 @@ if __name__ == "__main__":
         resizable=(False, True),
         geometry = "40x40+150+50"
     )
-    l = tkinter.Label(testWin, text="This is a label")
+    l = Tkinter.Label(testWin, text="This is a label")
     l.pack()
     
     def printInfo():
@@ -689,7 +689,7 @@ if __name__ == "__main__":
         print("req width, req height = %r, %r" % (testWin.winfo_reqwidth(), testWin.winfo_reqheight()))
         print("")
     
-    b = tkinter.Button(root, text="Window Info", command=printInfo)
+    b = Tkinter.Button(root, text="Window Info", command=printInfo)
     b.pack()
             
     root.mainloop()

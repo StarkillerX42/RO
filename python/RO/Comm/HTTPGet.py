@@ -46,7 +46,7 @@ import atexit
 import os
 import sys
 import time
-import tkinter
+import Tkinter
 import RO.AddCallback
 import RO.StringUtil
 import RO.TkUtil
@@ -180,7 +180,7 @@ class HTTPGet(RO.AddCallback.BaseMixin):
         timeLim = None,
     ):
         if self._tkApp is None:
-            self._tkApp = tkinter.Frame().tk
+            self._tkApp = Tkinter.Frame().tk
         self.fromURL = fromURL
         self.toPath = toPath
         self.isBinary = isBinary
@@ -259,7 +259,7 @@ class HTTPGet(RO.AddCallback.BaseMixin):
                 self._createdFile = True
                 if self.isBinary:
                     self._tkApp.call('fconfigure', self._tclFile, "-encoding", "binary", "-translation", "binary")
-            except tkinter.TclError as e:
+            except Tkinter.TclError as e:
                 raise RuntimeError("Could not open %r: %s" % (self.toPath, e))
             
             # start http transfer
@@ -510,7 +510,7 @@ class HTTPGet(RO.AddCallback.BaseMixin):
                 raise RuntimeError("%r is a file, not a directory" % (toDir,))
 
 if __name__ == "__main__":
-    root = tkinter.Tk()
+    root = Tkinter.Tk()
 
     testURL = "http://www.astro.washington.edu/"
     outFile = "httpget_test.html"

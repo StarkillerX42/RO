@@ -415,8 +415,8 @@ class TCPConnection(object):
 if __name__ == "__main__":
     """Demo using a simple echo server.
     """
-    import tkinter
-    root = tkinter.Tk()
+    import Tkinter
+    root = Tkinter.Tk()
     root.withdraw()
     from RO.Comm.Generic import TCPServer
     from RO.TkUtil import Timer

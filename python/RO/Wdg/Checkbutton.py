@@ -72,7 +72,7 @@ History:
 """
 __all__ = ['Checkbutton']
 
-import tkinter
+import Tkinter
 import RO.AddCallback
 import RO.CnvUtil
 import RO.MathUtil
@@ -81,7 +81,7 @@ from .CtxMenu import CtxMenuMixin
 from .IsCurrentMixin import AutoIsCurrentMixin, IsCurrentCheckbuttonMixin
 from .SeverityMixin import SeverityActiveMixin
 
-class Checkbutton (tkinter.Checkbutton, RO.AddCallback.TkVarMixin,
+class Checkbutton (Tkinter.Checkbutton, RO.AddCallback.TkVarMixin,
     AutoIsCurrentMixin, IsCurrentCheckbuttonMixin, SeverityActiveMixin, CtxMenuMixin):
     """A Checkbutton with callback, help, isCurrent and severity support.
     
@@ -150,7 +150,7 @@ class Checkbutton (tkinter.Checkbutton, RO.AddCallback.TkVarMixin,
     **kargs):
         self._defBool = False # just create the field for now
         if var is None:
-            var = tkinter.StringVar()
+            var = Tkinter.StringVar()
         elif defValue is None:
             defValue = var.get()
         self._var = var
@@ -173,7 +173,7 @@ class Checkbutton (tkinter.Checkbutton, RO.AddCallback.TkVarMixin,
             kargs.setdefault("indicatoron", False)
             kargs["textvariable"] = self._var
         
-        tkinter.Checkbutton.__init__(self,
+        Tkinter.Checkbutton.__init__(self,
             master = master,
             variable = self._var,
         )
@@ -251,7 +251,7 @@ class Checkbutton (tkinter.Checkbutton, RO.AddCallback.TkVarMixin,
         
         Enabled is defined as the state is not "disabled" (thus "enabled" or "active").
         """
-        return self["state"] != tkinter.DISABLED
+        return self["state"] != Tkinter.DISABLED
     
     def getVar(self):
         return self._var
@@ -336,7 +336,7 @@ class Checkbutton (tkinter.Checkbutton, RO.AddCallback.TkVarMixin,
         
         # if disabled and defIfDisabled, update display (which also triggers a callback)
         # otherwise leave the display alone and explicitly trigger a callback
-        if restoreDef or (self._defIfDisabled and self["state"] == tkinter.DISABLED):
+        if restoreDef or (self._defIfDisabled and self["state"] == Tkinter.DISABLED):
             self.restoreDefault()
         else:
             self._doCallbacks()
@@ -371,7 +371,7 @@ class Checkbutton (tkinter.Checkbutton, RO.AddCallback.TkVarMixin,
                 hasBitmap = bool(kargs.get("bitmap", self["bitmap"])),
                 showIndicator = kargs.get("indicatoron", self["indicatoron"]),
             )
-        tkinter.Checkbutton.configure(self, **kargs)
+        Tkinter.Checkbutton.configure(self, **kargs)
     
     def _computeCorrectedWidth(self, width, hasBitmap, showIndicator):
         """Compute corrected width to overcome Tcl/Tk bugs

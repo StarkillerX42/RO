@@ -5,16 +5,16 @@ Type and press <return> in the entry field along the bottom to send data
 """
 import sys
 import os
-import tkinter
+import Tkinter
 RORoot = os.path.join(os.path.dirname(os.path.abspath(os.path.dirname(__file__))), "python")
 sys.path.append(RORoot)
 import RO.CnvUtil
 import RO.Comm.TkSerial
 import RO.Wdg
 
-class SerialTerminal(tkinter.Frame):
+class SerialTerminal(Tkinter.Frame):
     def __init__(self, master, portName, localEcho=False, **serialOptions):
-        tkinter.Frame.__init__(self, master)
+        Tkinter.Frame.__init__(self, master)
         self.localEcho = RO.CnvUtil.asBool(localEcho)
         
         self.conn = RO.Comm.TkSerial.TkSerial(portName, readCallback=self.doRead, **serialOptions)
@@ -56,6 +56,6 @@ localEcho: True or False (default: False)
     for argInd in range(2, nArgs, 2):
         serialOptions[sys.argv[argInd]] = sys.argv[argInd+1]
     
-    root = tkinter.Tk()
+    root = Tkinter.Tk()
     serTerm = SerialTerminal(root, portName, **serialOptions)
     root.mainloop()

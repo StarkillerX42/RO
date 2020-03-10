@@ -8,11 +8,11 @@ History:
 """
 __all__ = ['Menubutton']
 
-import tkinter
+import Tkinter
 import RO.Constants
 from .CtxMenu import CtxMenu, CtxMenuMixin
 
-class Menubutton(tkinter.Menubutton, CtxMenuMixin):
+class Menubutton(Tkinter.Menubutton, CtxMenuMixin):
     def __init__(self,
         master,
         helpText = None,
@@ -34,7 +34,7 @@ class Menubutton(tkinter.Menubutton, CtxMenuMixin):
         """
         self.helpText = helpText
 
-        tkinter.Menubutton.__init__(self, master = master, **kwArgs)
+        Tkinter.Menubutton.__init__(self, master = master, **kwArgs)
 
         CtxMenuMixin.__init__(self, helpURL = helpURL)
     
@@ -47,13 +47,13 @@ class Menubutton(tkinter.Menubutton, CtxMenuMixin):
         Warning: if you want the state to be "active" you must set that explicitly.
         """
         if doEnable:
-            self["state"] = tkinter.NORMAL
+            self["state"] = Tkinter.NORMAL
         else:
-            self["state"] = tkinter.DISABLED
+            self["state"] = Tkinter.DISABLED
     
     def getEnable(self):
         """Return True if widget is enabled, False otherwise
 
         Enabled is defined as the state is not "disabled" (thus "enabled" or "active").
         """
-        return self["state"] != tkinter.DISABLED
+        return self["state"] != Tkinter.DISABLED

@@ -62,9 +62,9 @@ History:
 """
 import sys
 from . import PrefVar
-import tkinter
-import tkinter.colorchooser
-import tkinter.font
+import Tkinter
+import Tkinter.colorchooser
+import Tkinter.font
 import RO.Alg
 import RO.Wdg
 from RO.TkUtil import Timer
@@ -109,7 +109,7 @@ class PrefEditor(object):
         self.prefVar = prefVar
 
         # create and set a variable to contain the edited value
-        self.editVar = tkinter.StringVar()
+        self.editVar = Tkinter.StringVar()
         self.editVar.set(self.prefVar.getValueStr())
         
         # save initial value, in case we have to restore it
@@ -125,18 +125,18 @@ class PrefEditor(object):
             ("editWdg", "w"),
             ("unitsWdg", "w"),
         )
-        self.labelWdg = tkinter.Label(self.master, text = self.prefVar.name)
+        self.labelWdg = Tkinter.Label(self.master, text = self.prefVar.name)
         self._addCtxMenu(self.labelWdg)
         
-        self.changedVar = tkinter.StringVar()
-        self.changedWdg = tkinter.Label(self.master, width=1, textvariable=self.changedVar)
+        self.changedVar = Tkinter.StringVar()
+        self.changedWdg = Tkinter.Label(self.master, width=1, textvariable=self.changedVar)
         self._addCtxMenu(self.changedWdg)
 
         self.editWdg = self._getEditWdg()
         # self.rangeWdg = self._getRangeWdg()
 
         if self.prefVar.units:
-            self.unitsWdg = tkinter.Label(self.master, text = self.prefVar.name)
+            self.unitsWdg = Tkinter.Label(self.master, text = self.prefVar.name)
             self._addCtxMenu(self.unitsWdg)
         else:
             self.unitsWdg = None
@@ -257,17 +257,17 @@ class PrefEditor(object):
         return wdg
 
     def _getRangeWdg(self):
-        return tkinter.Label(self.master, text = self.prefVar.getRangeStr())
+        return Tkinter.Label(self.master, text = self.prefVar.getRangeStr())
     
     def _getShowMenu(self):
-        mbut = tkinter.Menubutton(self.master,
+        mbut = Tkinter.Menubutton(self.master,
             indicatoron=1,
             direction="below",
             borderwidth=2,
             relief="raised",
             highlightthickness=2,
         )
-        mnu = tkinter.Menu(mbut, tearoff=0)
+        mnu = Tkinter.Menu(mbut, tearoff=0)
         mnu.add_command(label="Current", command=self.showCurrentValue)
         mnu.add_command(label="Initial", command=self.showInitialValue)
         mnu.add_command(label="Default", command=self.showDefaultValue)
@@ -312,7 +312,7 @@ class PrefEditor(object):
         return False
 
 
-class _ColorButton(tkinter.Frame, RO.Wdg.CtxMenuMixin):
+class _ColorButton(Tkinter.Frame, RO.Wdg.CtxMenuMixin):
     """A button whose color can be set (without fussing
     with bitmaps and such).
     
@@ -337,12 +337,12 @@ class _ColorButton(tkinter.Frame, RO.Wdg.CtxMenuMixin):
         self.helpText = helpText
         
         # self is outer frame; button is a frame within (to allow padding)
-        tkinter.Frame.__init__(self,
+        Tkinter.Frame.__init__(self,
             master,
             borderwidth = 0,
         )
         
-        self.button = tkinter.Frame(
+        self.button = Tkinter.Frame(
             self,
             background = color,
             relief = "raised",
@@ -398,7 +398,7 @@ class ColorPrefEditor(PrefEditor):
     def editColor(self, evt=None):
         """Called when the color editor button is pressed"""
         oldColor = self.getEditValue()
-        newColor = tkinter.colorchooser.askcolor(oldColor)[1]
+        newColor = Tkinter.colorchooser.askcolor(oldColor)[1]
         if newColor:
             self.showValue(newColor)
 
@@ -454,7 +454,7 @@ class SoundPrefEditor(PrefEditor):
         - var: a Tkinter variable to be used in the widget
         - ctxConfigFunc: a function that updates the contextual menu
         """
-        wdgFrame = tkinter.Frame(self.master)
+        wdgFrame = Tkinter.Frame(self.master)
         self.fileWdg = RO.Wdg.FileWdg(
             master = wdgFrame,
             defPath = self.getEditValue(),
@@ -506,7 +506,7 @@ class FontPrefEditor(PrefEditor):
     def _getEditWdg(self):
         currFontDict = self.prefVar.value
         fontFamilies = []
-        for fam in tkinter.font.families():
+        for fam in Tkinter.font.families():
             try:
                 fam = str(fam)
                 if fam.startswith("."):
@@ -518,15 +518,15 @@ class FontPrefEditor(PrefEditor):
         fontSizes = [str(x) for x in range(6, 25)]
         
         # create a Font for the font editor widgets
-        self.editFont = tkinter.font.Font(**currFontDict)
+        self.editFont = Tkinter.font.Font(**currFontDict)
         
         fontNameVarSet = (
-            ("family", tkinter.StringVar()),
-            ("size", tkinter.StringVar()),
-            ("weight", tkinter.StringVar()),
-            ("slant", tkinter.StringVar()),
-            ("underline", tkinter.BooleanVar()),
-            ("overstrike", tkinter.BooleanVar()),
+            ("family", Tkinter.StringVar()),
+            ("size", Tkinter.StringVar()),
+            ("weight", Tkinter.StringVar()),
+            ("slant", Tkinter.StringVar()),
+            ("underline", Tkinter.BooleanVar()),
+            ("overstrike", Tkinter.BooleanVar()),
         )
         self.varDict = {}
         for varName, var in fontNameVarSet:
@@ -536,7 +536,7 @@ class FontPrefEditor(PrefEditor):
             var.set(defValue)
             self.varDict[varName] = var
         
-        frame = tkinter.Frame(self.master)
+        frame = Tkinter.Frame(self.master)
         fontNameWdg = RO.Wdg.OptionMenu(
             master = frame,
             items = fontFamilies,
@@ -558,7 +558,7 @@ class FontPrefEditor(PrefEditor):
         fontSizeWdg.configure(font=self.editFont)
         fontSizeWdg.ctxSetConfigFunc(self._configCtxMenu)
 
-        fontOptionWdg = tkinter.Menubutton(frame,
+        fontOptionWdg = Tkinter.Menubutton(frame,
             text="Options",
             indicatoron=1,
             direction="below",
@@ -566,7 +566,7 @@ class FontPrefEditor(PrefEditor):
             relief="raised",
             highlightthickness=2,
         )
-        mnu = tkinter.Menu(fontOptionWdg, tearoff=0)
+        mnu = Tkinter.Menu(fontOptionWdg, tearoff=0)
         mnu.add_checkbutton(label="Bold", variable=self.varDict["weight"], onvalue="bold", offvalue="normal")
         mnu.add_checkbutton(label="Italic", variable=self.varDict["slant"], onvalue="italic", offvalue="roman")
         mnu.add_checkbutton(label="Underline", variable=self.varDict["underline"], onvalue=True, offvalue=False)

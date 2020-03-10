@@ -97,8 +97,8 @@ __all__ = ["PrefVar", "StrPrefVar", "DirectoryPrefVar", "FilePrefVar", "SoundPre
 import os.path
 import re
 import sys
-import tkinter
-import tkinter.font
+import Tkinter
+import Tkinter.font
 import RO.Alg
 import RO.CnvUtil
 import RO.MathUtil
@@ -746,7 +746,7 @@ class ColorUpdate(object):
     def setColor(self, *args):
         # if we haven't gotten a widget yet, now is the time
         if not self.wdg:
-            self.wdg = tkinter.Label()
+            self.wdg = Tkinter.Label()
 
         colorDict = {}
         for option, var in self.varDict.items():
@@ -776,7 +776,7 @@ class ColorPrefVar(PrefVar):
         kargs = kargs.copy()    # prevent modifying a passed-in dictionary
 
         # create an arbitrary Tk widget we can query to convert colors
-        self.colorCheckWdg = tkinter.Label()
+        self.colorCheckWdg = Tkinter.Label()
 
         kargs["formatStr"] = "%s"
         kargs["cnvFunc"] = str
@@ -797,7 +797,7 @@ class ColorPrefVar(PrefVar):
         """
         try:
             self.colorCheckWdg.winfo_rgb(value)
-        except tkinter.TclError as e:
+        except Tkinter.TclError as e:
             raise ValueError(RO.StringUtil.strFromException(e))
 
 class FontPrefVar(PrefVar):
@@ -844,7 +844,7 @@ class FontPrefVar(PrefVar):
     ):
         kargs = kargs.copy()    # prevent modifying a passed-in dictionary
 
-        self.font = font or tkinter.font.Font()
+        self.font = font or Tkinter.font.Font()
         kargs["formatStr"] = "%r"
         kargs["cnvFunc"] = dict # a function that parsed string representations of a dict would be nicer
 
@@ -867,7 +867,7 @@ class FontPrefVar(PrefVar):
             netDefValue.update(font.configure())
         if defWdg:
             # the following is the only way I know to obtain a font dictionary from a widget
-            wdgFontDict = tkinter.font.Font(font=defWdg.cget("font")).configure()
+            wdgFontDict = Tkinter.font.Font(font=defWdg.cget("font")).configure()
             netDefValue.update(wdgFontDict)
         if defValue:
             # defValue is the only one likely to have a bogus value; check it before applying it
@@ -884,7 +884,7 @@ class FontPrefVar(PrefVar):
 
         # if optionPatterns supplied, add font to option database
         for ptn in optionPatterns:
-            tkinter.Label().option_add(ptn, self.font)
+            Tkinter.Label().option_add(ptn, self.font)
     
     def getDefValue(self):
         """Return the current default value"""
@@ -982,7 +982,7 @@ class FontSizePrefVar(PrefVar):
     ):
         kargs = kargs.copy()    # prevent modifying a passed-in dictionary
 
-        self.font = tkinter.font.Font()
+        self.font = Tkinter.font.Font()
         kargs["formatStr"] = "%s"
         kargs["cnvFunc"] = int
         
@@ -992,7 +992,7 @@ class FontSizePrefVar(PrefVar):
             netDefValue = font.cget("size")
         if defWdg:
             # the following is the only way I know to obtain a font dictionary from a widget
-            netDefValue = tkinter.font.Font(font=defWdg.cget("font")).cget("size")
+            netDefValue = Tkinter.font.Font(font=defWdg.cget("font")).cget("size")
         if defValue:
             # defValue is the only one likely to have a bogus value; check it before applying it
             self.locCheckValue(defValue)
@@ -1007,7 +1007,7 @@ class FontSizePrefVar(PrefVar):
 
         # if optionPatterns supplied, add font to option database
         for ptn in optionPatterns:
-            tkinter.Label().option_add(ptn, self.font)
+            Tkinter.Label().option_add(ptn, self.font)
     
     def locCheckValue(self, value):
         """Test that the value is valid.

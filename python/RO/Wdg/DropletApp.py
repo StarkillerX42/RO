@@ -45,13 +45,13 @@ __all__ = ["DropletApp"]
 
 import sys
 import traceback
-import tkinter
+import Tkinter
 import RO.OS
 import RO.Constants
 from RO.TkUtil import Timer
 from . import LogWdg
 
-class DropletApp(tkinter.Frame):
+class DropletApp(Tkinter.Frame):
     """Run an application as a droplet (an application onto which you drop files)
     
     You must subclass this class and override processFile.
@@ -100,7 +100,7 @@ class DropletApp(tkinter.Frame):
             If None then no final message is printed.
             If supplied then a final \n is also added.
         """
-        tkinter.Frame.__init__(self, master)
+        Tkinter.Frame.__init__(self, master)
         self.printTraceback = bool(printTraceback)
         self.patterns = patterns
         self.exclPatterns = exclPatterns
@@ -184,7 +184,7 @@ if __name__ == "__main__":
     if filePathList and filePathList[0].startswith("-"):
         filePathList = filePathList[1:]
 
-    root = tkinter.Tk()
+    root = Tkinter.Tk()
     
     class TestApp(DropletApp):
         def __init__(self, master):

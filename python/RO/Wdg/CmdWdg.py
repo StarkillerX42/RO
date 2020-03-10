@@ -28,7 +28,7 @@ History:
 """
 __all__ = ['CmdWdg']
 
-import tkinter
+import Tkinter
 from . import Entry
 
 class CmdWdg (Entry.StrEntry):
@@ -109,11 +109,11 @@ class CmdWdg (Entry.StrEntry):
         if self.histIndex > 0:
             self.histIndex -= 1
             self.set(self.cmdHistory[self.histIndex])
-            self.icursor(tkinter.END)
+            self.icursor(Tkinter.END)
         elif self.histIndex == 0:
             self.set(self.currText)
             self.histIndex = -1
-            self.icursor(tkinter.END)
+            self.icursor(Tkinter.END)
         return "break" # prevent event from being propogated            
     
     def _doHistUp(self, *args, **kargs):
@@ -130,7 +130,7 @@ class CmdWdg (Entry.StrEntry):
         if self.histIndex < len(self.cmdHistory) - 1:
             self.histIndex += 1
             self.set(self.cmdHistory[self.histIndex])
-            self.icursor(tkinter.END)
+            self.icursor(Tkinter.END)
         else:
             self.histIndex = len(self.cmdHistory)
             self.set("")
@@ -158,6 +158,6 @@ if __name__ == "__main__":
         cmdFunc=doCmd,
         width = 40,
     )
-    testFrame.pack(fill=tkinter.BOTH, expand=tkinter.YES)
+    testFrame.pack(fill=Tkinter.BOTH, expand=Tkinter.YES)
 
     root.mainloop()

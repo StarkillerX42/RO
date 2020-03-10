@@ -12,9 +12,9 @@ History:
 """
 __all__ = ['ScrolledWdg']
 
-import tkinter
+import Tkinter
 
-class ScrolledWdg(tkinter.Frame):
+class ScrolledWdg(Tkinter.Frame):
     """Scroll a widget such as a frame.
     
     Due to quirks in tk or Tkinter this requires three steps:
@@ -39,7 +39,7 @@ class ScrolledWdg(tkinter.Frame):
         height = 0,
     **kargs):
         
-        tkinter.Frame.__init__(self, master, **kargs)
+        Tkinter.Frame.__init__(self, master, **kargs)
         
         self._hscroll = bool(hscroll)
         self._vscroll = bool(vscroll)
@@ -48,12 +48,12 @@ class ScrolledWdg(tkinter.Frame):
         self._vincr = None
 
         # create the canvas
-        self._cnv = tkinter.Canvas(self, height=height, highlightthickness=0, selectborderwidth=0)
+        self._cnv = Tkinter.Canvas(self, height=height, highlightthickness=0, selectborderwidth=0)
         self._cnv.grid(row=0, column=0, sticky="nsew")
         
         # create the scrollbars and connect them up
         if hscroll:
-            hsb = tkinter.Scrollbar(self, orient="horizontal", command=self._cnv.xview)
+            hsb = Tkinter.Scrollbar(self, orient="horizontal", command=self._cnv.xview)
             self._cnv.configure(xscrollcommand = hsb.set)
             hsb.grid(row=1, column=0, sticky="ew")
         else:
@@ -61,7 +61,7 @@ class ScrolledWdg(tkinter.Frame):
         self._hscrollbar = hsb
         
         if vscroll:
-            vsb = tkinter.Scrollbar(self, orient="vertical", command=self._cnv.yview)
+            vsb = Tkinter.Scrollbar(self, orient="vertical", command=self._cnv.yview)
             self._cnv.configure(yscrollcommand = vsb.set)
             vsb.grid(row=0, column=1, sticky="ns")
         else:
@@ -177,11 +177,11 @@ if __name__ == '__main__':
     )
 
     labelDict = {}
-    testFrame = tkinter.Frame(scFrame.getWdgParent())
+    testFrame = Tkinter.Frame(scFrame.getWdgParent())
     for row in range(NRows):
         for col in range(NCol):
             ind = (row, col)
-            label = tkinter.Label(testFrame, text="%s" % (ind,))
+            label = Tkinter.Label(testFrame, text="%s" % (ind,))
             label.grid(row = row, column=col)
             labelDict[ind] = label
     

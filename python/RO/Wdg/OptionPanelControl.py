@@ -27,7 +27,7 @@ History:
 """
 __all__ = ['OptionPanelControl']
 
-import tkinter
+import Tkinter
 from .Checkbutton import Checkbutton
 from .CtxMenu import CtxMenuMixin
 
@@ -52,7 +52,7 @@ class _WdgButton(Checkbutton):
         try:
             var = wdg.getShowVar()
         except AttributeError:
-            var = tkinter.BooleanVar()
+            var = Tkinter.BooleanVar()
         
         Checkbutton.__init__(self,
             master = master,
@@ -82,7 +82,7 @@ class _WdgButton(Checkbutton):
         self._updVisible()
 
 
-class OptionPanelControl(tkinter.Frame, CtxMenuMixin):
+class OptionPanelControl(Tkinter.Frame, CtxMenuMixin):
     def __init__ (self,
         master,
         wdgList,
@@ -105,15 +105,15 @@ class OptionPanelControl(tkinter.Frame, CtxMenuMixin):
         (i.e. packing or gridding). This widget displays checkbuttons which will automatically
         show or hide (by gridding or ungridding) the widgets within their master frame.
         """
-        tkinter.Frame.__init__(self, master, **kargs)
+        Tkinter.Frame.__init__(self, master, **kargs)
         CtxMenuMixin.__init__(self)
         self._btnDict = {}
         
         if labelText is not None:
-            tkinter.Label(self, text=labelText).pack(side="top", anchor="nw")
+            Tkinter.Label(self, text=labelText).pack(side="top", anchor="nw")
 
         wdgMaster = wdgList[0][1].master
-        emptyFrame = tkinter.Frame(wdgMaster)
+        emptyFrame = Tkinter.Frame(wdgMaster)
         emptyFrame.grid(row=0, column=0)
         
         for ind in range(len(wdgList)):
@@ -175,12 +175,12 @@ if __name__ == "__main__":
     root = PythonTk()
     
     # frame for the set of hideable widgets
-    wdgFrame = tkinter.Frame(root, bg="red", relief="ridge")
+    wdgFrame = Tkinter.Frame(root, bg="red", relief="ridge")
     
     # hideable widgets
-    wdgA = tkinter.Label(wdgFrame, text="Wdg A")
-    wdgB = tkinter.Label(wdgFrame, text="Wdg B")
-    wdgC = tkinter.Label(wdgFrame, text="Wdg C")
+    wdgA = Tkinter.Label(wdgFrame, text="Wdg A")
+    wdgB = Tkinter.Label(wdgFrame, text="Wdg B")
+    wdgC = Tkinter.Label(wdgFrame, text="Wdg C")
     
     extFrame = OptionPanelControl(
         root,

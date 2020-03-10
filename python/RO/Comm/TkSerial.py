@@ -31,7 +31,7 @@ __all__ = ["TkSerial", "NullSerial"]
 
 import sys
 import traceback
-import tkinter
+import Tkinter
 import RO.SeqUtil
 import RO.TkUtil
 try:
@@ -185,7 +185,7 @@ class TkSerial(TkBaseSerial):
         )
         self._readCallback = readCallback
         
-        self._tk = tkinter.StringVar()._tk
+        self._tk = Tkinter.StringVar()._tk
 
         self._chanID = 0
         try:
@@ -212,7 +212,7 @@ class TkSerial(TkBaseSerial):
             # and is just used to detect state
             self._setSockCallback(self._doRead)
 
-        except tkinter.TclError as e:
+        except Tkinter.TclError as e:
             raise RuntimeError(e)
 
     def close(self, isOK=True, reason=None):
@@ -368,7 +368,7 @@ class TkSerial(TkBaseSerial):
         
         try:
             self._tk.call('fileevent', self._chanID, typeStr, tkFuncName)
-        except tkinter.TclError as e:
+        except Tkinter.TclError as e:
             if tclFunc:
                 tclFunc.deregister()
             raise RuntimeError(e)

@@ -15,7 +15,7 @@ History:
 """
 __all__ = ['enableBalloonHelp']
 
-import tkinter
+import Tkinter
 from RO.TkUtil import Timer
 
 _HelpObj = None
@@ -40,9 +40,9 @@ class _BalloonHelp:
         self._delayMS = delayMS
         self._showTimer = Timer()
         self._leaveTimer = Timer()
-        self._msgWin = tkinter.Toplevel()
+        self._msgWin = Tkinter.Toplevel()
         self._msgWin.overrideredirect(True)
-        self._msgWdg = tkinter.Message(self._msgWin, bg="light yellow")
+        self._msgWdg = Tkinter.Message(self._msgWin, bg="light yellow")
         self._msgWdg.pack()
         self._msgWin.withdraw()
         self._msgWdg.bind_all('<Motion>', self._start)
@@ -126,19 +126,19 @@ def enableBalloonHelp(delayMS = 1000):
 
 if __name__ == '__main__':
     from . import OptionMenu
-    root = tkinter.Tk()
+    root = Tkinter.Tk()
     
-    l0 = tkinter.Label(text="Data")
+    l0 = Tkinter.Label(text="Data")
     l0.grid(row=0, column=0, sticky="e")
     l0.helpText = "Help for the Data label"
-    e0 = tkinter.Entry(width=10)
+    e0 = Tkinter.Entry(width=10)
     e0.helpText = "A really long help string describing the data entry widget"
     e0.grid(row=0, column=1)
-    l1 = tkinter.Label(text="No Help")
+    l1 = Tkinter.Label(text="No Help")
     l1.grid(row=1, column=0)
-    e1 = tkinter.Entry(width=10)
+    e1 = Tkinter.Entry(width=10)
     e1.grid(row=1, column=1)
-    l2 = tkinter.Label(text="Option Menu")
+    l2 = Tkinter.Label(text="Option Menu")
     l2.helpText = "Help for the option menu label"
     l2.grid(row=2, column=0)
     m2 = OptionMenu.OptionMenu(root,

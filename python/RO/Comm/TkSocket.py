@@ -20,7 +20,7 @@ History:
 2003-04-04 ROwen    Bug fix: BasicSocket was being set to a function instead of a type;
                     this failed under Windows (hanks to Craig Loomis for report and fix).
 2003-05-01 ROwen    Modified to work with Python 2.3b1 (which does not support
-                    _tkinter.create/deletefilehandler); thanks to Martin v. Lowis for the fix.
+                    _Tkinter.create/deletefilehandler); thanks to Martin v. Lowis for the fix.
 2003-10-13 ROwen    Overhauled to more robust and to prevent delays while connecting.
                     Also added support for monitoring state.
 2003-10-14 ROwen    Bug fix: close while NotConnected caused perpetual Closing state.
@@ -95,7 +95,7 @@ __all__ = ["TCPSocket", "TCPServer"]
 import re
 import sys
 import traceback
-import tkinter
+import Tkinter
 import RO.TkUtil
 from RO.Comm.BaseSocket import BaseSocket, BaseServer, nullCallback
 
@@ -120,7 +120,7 @@ class _TkSocketWrapper(object):
         # typeStr is one of "readable" or "writable"
         # tclFunc is a tcl-wrapped function, an instance of RO.TkUtil.TclFunc
         self._callbackDict = dict()
-        self._readVar = tkinter.StringVar()
+        self._readVar = Tkinter.StringVar()
         self._tk = self._readVar._tk
 
         if tkSock:
@@ -128,7 +128,7 @@ class _TkSocketWrapper(object):
         elif sockArgs:
             try:
                 self._tkSocket = self._tk.call('socket', *sockArgs)
-            except tkinter.TclError as e:
+            except Tkinter.TclError as e:
                 raise RuntimeError(e)
         else:
             raise RuntimeError("Must specify tkSock or sockArgs")
@@ -143,7 +143,7 @@ class _TkSocketWrapper(object):
 
             #print "name=%s, configArgs=%s" % (name, configArgs)
             self._tk.call('fconfigure', self._tkSocket, *configArgs)
-        except tkinter.TclError as e:
+        except Tkinter.TclError as e:
             raise RuntimeError(e)
 
     @property
@@ -206,7 +206,7 @@ class _TkSocketWrapper(object):
 
         try:
             self._tk.call('fileevent', self._tkSocket, typeStr, tkFuncName)
-        except tkinter.TclError as e:
+        except Tkinter.TclError as e:
             if tclFunc:
                 tclFunc.deregister()
             raise RuntimeError(e)
@@ -301,7 +301,7 @@ class TCPSocket(BaseSocket):
             # and is just used to detect state
             self._tkSocketWrapper.setCallback(self._doRead, doWrite=False)
             self._tkSocketWrapper.setCallback(self._doConnect, doWrite=True)
-        except tkinter.TclError as e:
+        except Tkinter.TclError as e:
             raise RuntimeError(e)
 
         self._setState(self.Connecting)
@@ -549,7 +549,7 @@ class TCPServer(BaseServer):
 if __name__ == "__main__":
     """Demo using a simple echo server.
     """
-    root = tkinter.Tk()
+    root = Tkinter.Tk()
     root.withdraw()
     from RO.TkUtil import Timer
 

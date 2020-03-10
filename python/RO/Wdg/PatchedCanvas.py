@@ -15,11 +15,11 @@ History:
 __all__ = ['PatchedCanvas']
 
 import warnings
-import tkinter
+import Tkinter
 
-class PatchedCanvas(tkinter.Canvas):
+class PatchedCanvas(Tkinter.Canvas):
     def __init__(self, *args, **kargs):
-        tkinter.Canvas.__init__(self, *args, **kargs)
+        Tkinter.Canvas.__init__(self, *args, **kargs)
         
         warnings.warn("RO.Wdg.PatchedCanvas is obsolete; please use Tkinter.Canvas instead.",
             category = DeprecationWarning,
@@ -28,7 +28,7 @@ class PatchedCanvas(tkinter.Canvas):
 
 
 if __name__ == "__main__":
-    root = tkinter.Tk()
+    root = Tkinter.Tk()
     c = PatchedCanvas(root, width=200, height=200)
     c.pack()
     

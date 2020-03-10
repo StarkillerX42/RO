@@ -230,9 +230,9 @@ class NullConnection(HubConnection):
 
 
 if __name__ == "__main__":
-    import tkinter
+    import Tkinter
     import RO.Wdg
-    root = tkinter.Tk()
+    root = Tkinter.Tk()
 
     host = "hub35m.apo.nmsu.edu"
     port = 9877
@@ -257,12 +257,12 @@ if __name__ == "__main__":
         class PasswordDialog(RO.Wdg.ModalDialogBase):
             def body(self, master):
         
-                tkinter.Label(master, text="Program ID:").grid(row=0, column=0)
-                tkinter.Label(master, text="Password  :").grid(row=1, column=0)
+                Tkinter.Label(master, text="Program ID:").grid(row=0, column=0)
+                Tkinter.Label(master, text="Password  :").grid(row=1, column=0)
         
-                self.nameEntry = tkinter.Entry(master)
+                self.nameEntry = Tkinter.Entry(master)
                 self.nameEntry.grid(row=0, column=1)
-                self.pwdEntry = tkinter.Entry(master, show="*")
+                self.pwdEntry = Tkinter.Entry(master, show="*")
                 self.pwdEntry.grid(row=1, column=1)
                 return self.nameEntry # return the item that gets initial focus
         
@@ -282,15 +282,15 @@ if __name__ == "__main__":
             )
 
 
-    tkinter.Label(text="Send:").pack(side="left")
-    sendText = tkinter.Entry(root)
+    Tkinter.Label(text="Send:").pack(side="left")
+    sendText = Tkinter.Entry(root)
     sendText.pack(fill="x", expand="yes", side="left")
     sendText.focus_set()
 
     def sendCmd (evt):
         try:
             astr = sendText.get()
-            sendText.delete(0,tkinter.END)
+            sendText.delete(0,Tkinter.END)
             myConn.writeLine(astr)
         except Exception as e:
             sys.stderr.write ("Could not extract or send: %s\nError: %s\n" % (astr, e))

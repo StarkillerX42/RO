@@ -16,11 +16,11 @@ History:
 """
 __all__ = ['ChangedIndicator']
 
-import tkinter
+import Tkinter
 import RO.SeqUtil
 from .CtxMenu import CtxMenu, CtxMenuMixin
 
-class ChangedIndicator (tkinter.Label, CtxMenuMixin):
+class ChangedIndicator (Tkinter.Label, CtxMenuMixin):
     def __init__(self,
         master,
         wdgOrSet,
@@ -40,7 +40,7 @@ class ChangedIndicator (tkinter.Label, CtxMenuMixin):
         - all remaining keyword arguments are used to configure the Menu
         """
         if var is None:
-            var = tkinter.StringVar()       
+            var = Tkinter.StringVar()       
         self.__var = var
         self.__inputCont = None
         self.wdgSet = []
@@ -50,7 +50,7 @@ class ChangedIndicator (tkinter.Label, CtxMenuMixin):
         
         kargs.setdefault("width", 1)
 
-        tkinter.Label.__init__(self,
+        Tkinter.Label.__init__(self,
             master = master,
             textvariable = self.__var,
         **kargs)

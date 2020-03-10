@@ -62,7 +62,7 @@ __all__ = ["DropletRunner"]
 import sys
 import os.path
 import subprocess
-import tkinter
+import Tkinter
 import RO.OS
 import RO.Constants
 from RO.TkUtil import Timer
@@ -91,7 +91,7 @@ class DropletRunner(object):
         if not os.path.isfile(scriptPath):
             raise RuntimeError("Cannot find script %r" % (self.scriptPath,))
 
-        self.tkRoot = tkinter.Tk()
+        self.tkRoot = Tkinter.Tk()
         self._timer = Timer()
         
         if title is None:
@@ -129,8 +129,8 @@ class DropletRunner(object):
         self.isRunning = True
         argList = [sys.executable, self.scriptPath] + list(filePathList)
         self.subProc = subprocess.Popen(argList, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        self.tkRoot.tk.createfilehandler(self.subProc.stderr, tkinter.READABLE, self._readStdErr)
-        self.tkRoot.tk.createfilehandler(self.subProc.stdout, tkinter.READABLE, self._readStdOut)
+        self.tkRoot.tk.createfilehandler(self.subProc.stderr, Tkinter.READABLE, self._readStdErr)
+        self.tkRoot.tk.createfilehandler(self.subProc.stdout, Tkinter.READABLE, self._readStdOut)
         self._poll()
 
     def _macOpenDocument(self, *filePathList):

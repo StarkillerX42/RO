@@ -18,7 +18,7 @@ __all__ = ['bell', 'BellPlay', 'SoundPlayer', 'NoPlay']
 
 import os
 import sys
-import tkinter
+import Tkinter
 import RO.StringUtil
 try:
     import pygame.mixer
@@ -43,7 +43,7 @@ def bell(num=1, delay=100):
     """
     global _TkWdg
     if not _TkWdg:
-        _TkWdg = tkinter.Frame()
+        _TkWdg = Tkinter.Frame()
     _TkWdg.bell()
     if num > 1:
         _TkWdg.after(int(delay), bell, int(num)-1, int(delay))

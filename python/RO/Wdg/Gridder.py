@@ -39,7 +39,7 @@ History:
 """
 __all__ = ['Gridder']
 
-import tkinter
+import Tkinter
 import RO.Alg
 import RO.SeqUtil
 from .Label import Label, StrLabel
@@ -284,7 +284,7 @@ class Gridder(object):
             spaceCol = newDefCol - 1
             if spaceCol < self._maxNextCol:
                 raise ValueError("col too small; no room for spacer column")
-            tkinter.Frame(self._master, width=spacing).grid(row=row, column=spaceCol)
+            Tkinter.Frame(self._master, width=spacing).grid(row=row, column=spaceCol)
 
         self.setDefCol(newDefCol)
 
@@ -382,11 +382,11 @@ class _BaseGridSet:
         """
         if wdgInfo in (None, False):
             return wdgInfo
-        elif isinstance(wdgInfo, tkinter.Widget):
+        elif isinstance(wdgInfo, Tkinter.Widget):
             # a widget; assume it's a Label widget of some kind
             return wdgInfo
         
-        if isinstance(wdgInfo, tkinter.Variable):
+        if isinstance(wdgInfo, Tkinter.Variable):
             # a Tkinter variable
             wdg = StrLabel(
                 master = self.master,
@@ -498,32 +498,32 @@ if __name__ == "__main__":
     from . import PythonTk
     root = PythonTk.PythonTk()
     
-    wdgFrame = tkinter.Frame(root)
+    wdgFrame = Tkinter.Frame(root)
     gr = Gridder(wdgFrame)
     gr.gridWdg (
         label = "Opt 1",
-        dataWdg = tkinter.Entry(wdgFrame, width=5),
+        dataWdg = Tkinter.Entry(wdgFrame, width=5),
         units = "mHz",
     )
-    sv = tkinter.StringVar()
+    sv = Tkinter.StringVar()
     sv.set("Option 2")
     gs = gr.gridWdg (
         label = sv,
-        dataWdg = tkinter.Entry(wdgFrame, width=5),
+        dataWdg = Tkinter.Entry(wdgFrame, width=5),
         units = "bars",
     )
     gr.gridWdg (
-        label = tkinter.Label(wdgFrame, text="No Units"),
-        dataWdg = tkinter.Entry(wdgFrame, width=5),
+        label = Tkinter.Label(wdgFrame, text="No Units"),
+        dataWdg = Tkinter.Entry(wdgFrame, width=5),
     )
     gr.gridWdg (
         label = "Blank Units",
-        dataWdg = tkinter.Entry(wdgFrame, width=5),
+        dataWdg = Tkinter.Entry(wdgFrame, width=5),
         units = "",
     )
     gr.gridWdg (
         label = "Pair",
-        dataWdg = [tkinter.Entry(wdgFrame, width=5) for ii in range(2)],
+        dataWdg = [Tkinter.Entry(wdgFrame, width=5) for ii in range(2)],
     )
     wdgFrame.pack()
     

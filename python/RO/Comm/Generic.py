@@ -166,8 +166,8 @@ class WaitForTCPServer(object):
 
 
 if __name__ == "__main__":
-    import tkinter
-    root = tkinter.Tk()
+    import Tkinter
+    root = Tkinter.Tk()
     root.withdraw()
     setFramework("tk") # since it is almost always installed
     clientSocket = None

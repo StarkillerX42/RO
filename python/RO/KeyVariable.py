@@ -1112,12 +1112,12 @@ class KeyVarFactory(object):
 
 
 if __name__ == "__main__":
-    import tkinter
+    import Tkinter
     doBasic = True
     doFmt = True
     import RO.Astro.Tm
     
-    root = tkinter.Tk()
+    root = Tkinter.Tk()
 
     if doBasic:
         print("\nrunning basic variables test")

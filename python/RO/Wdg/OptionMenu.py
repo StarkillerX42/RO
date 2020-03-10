@@ -108,7 +108,7 @@ History:
 """
 __all__ = ['OptionMenu']
 
-import tkinter
+import Tkinter
 import RO.AddCallback
 import RO.Alg
 import RO.SeqUtil
@@ -191,7 +191,7 @@ class OptionMenu(Menubutton, RO.AddCallback.TkVarMixin,
     **kargs):
         showDefault = not (var and defValue is None)
         if var is None:
-            var = tkinter.StringVar()
+            var = Tkinter.StringVar()
         self._tempValue = None
         self._items = []
         self.defValue = None
@@ -225,7 +225,7 @@ class OptionMenu(Menubutton, RO.AddCallback.TkVarMixin,
             wdgKArgs["textvariable"] = var
         self.label = label
         Menubutton.__init__(self, master = master, helpURL = helpURL, **wdgKArgs)
-        self._menu = tkinter.Menu(self, tearoff = False, postcommand = postCommand)
+        self._menu = Tkinter.Menu(self, tearoff = False, postcommand = postCommand)
         self["menu"] = self._menu
 
         RO.AddCallback.TkVarMixin.__init__(self, var)

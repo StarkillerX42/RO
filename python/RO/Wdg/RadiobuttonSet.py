@@ -45,7 +45,7 @@ History:
 """
 __all__ = ['RadiobuttonSet']
 
-import tkinter
+import Tkinter
 import RO.AddCallback
 import RO.Alg
 import RO.SeqUtil
@@ -145,7 +145,7 @@ class RadiobuttonSet (RO.AddCallback.TkVarMixin,
 
         self._valueList = valueList
         if var is None:
-            var = tkinter.StringVar()
+            var = Tkinter.StringVar()
         self._var = var
         self._defIfBlank = defIfBlank
 
@@ -315,7 +315,7 @@ if __name__ == "__main__":
     from .StatusBar import StatusBar
     root = PythonTk.PythonTk()
 
-    rbFrame1 = tkinter.Frame()
+    rbFrame1 = Tkinter.Frame()
     rbs1 = RadiobuttonSet(
         master = rbFrame1,
         textList = ("Foo", "Bar", "Baz"),
@@ -330,7 +330,7 @@ if __name__ == "__main__":
         wdg.pack(side="left")
     rbFrame1.pack(side="top")
 
-    rbFrame2 = tkinter.Frame()
+    rbFrame2 = Tkinter.Frame()
     rbs2 = RadiobuttonSet(
         master = rbFrame2,
         textList = ("MmmmmNnnnn A", "MmmmmNnnnn B", "MmmmmNnnnn C"),
@@ -344,7 +344,7 @@ if __name__ == "__main__":
         wdg.pack(side="left")
     rbFrame2.pack(side="top")
 
-    rbFrame3 = tkinter.Frame()
+    rbFrame3 = Tkinter.Frame()
     rbs3 = RadiobuttonSet(
         master = rbFrame3,
         textList = ("MmmmmNnnnn A", "MmmmmNnnnn B", "MmmmmNnnnn C"),
@@ -364,7 +364,7 @@ if __name__ == "__main__":
         print("2 value = %r; default = %r" % (rbs2.getString(), rbs2.getDefault()))
         print("3 value = %r; default = %r" % (rbs3.getString(), rbs3.getDefault()))
     
-    enableVar = tkinter.IntVar()
+    enableVar = Tkinter.IntVar()
     enableVar.set(True)
     def setEnable():
         rbs1.setEnable(enableVar.get())
@@ -373,9 +373,9 @@ if __name__ == "__main__":
 
     StatusBar(root).pack(side="top", fill="x", expand=True)
     
-    cmdFrame = tkinter.Frame()
-    tkinter.Button(cmdFrame, text="Print Value", command=doPrint).pack(side="left")
-    tkinter.Checkbutton(cmdFrame, text="Enable", command=setEnable, variable=enableVar).pack(side="left")
+    cmdFrame = Tkinter.Frame()
+    Tkinter.Button(cmdFrame, text="Print Value", command=doPrint).pack(side="left")
+    Tkinter.Checkbutton(cmdFrame, text="Enable", command=setEnable, variable=enableVar).pack(side="left")
     cmdFrame.pack(side="top")
 
     root.mainloop()

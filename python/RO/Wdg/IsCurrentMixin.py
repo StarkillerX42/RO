@@ -226,33 +226,33 @@ class AutoIsCurrentMixin(object):
     
     
 if __name__ == "__main__":
-    import tkinter
+    import Tkinter
     from . import PythonTk
     root = PythonTk.PythonTk()
     
-    class ColorButton(tkinter.Button, IsCurrentActiveMixin):
+    class ColorButton(Tkinter.Button, IsCurrentActiveMixin):
         def __init__(self, *args, **kargs):
-            tkinter.Button.__init__(self, *args, **kargs)
+            Tkinter.Button.__init__(self, *args, **kargs)
             IsCurrentActiveMixin.__init__(self)
 
-    class ColorCheckbutton(tkinter.Checkbutton, IsCurrentActiveMixin):
+    class ColorCheckbutton(Tkinter.Checkbutton, IsCurrentActiveMixin):
         def __init__(self, *args, **kargs):
-            tkinter.Checkbutton.__init__(self, *args, **kargs)
+            Tkinter.Checkbutton.__init__(self, *args, **kargs)
             IsCurrentActiveMixin.__init__(self)
 
-    class ColorEntry(tkinter.Entry, IsCurrentMixin):
+    class ColorEntry(Tkinter.Entry, IsCurrentMixin):
         def __init__(self, *args, **kargs):
-            tkinter.Entry.__init__(self, *args, **kargs)
+            Tkinter.Entry.__init__(self, *args, **kargs)
             IsCurrentMixin.__init__(self)
 
-    class ColorLabel(tkinter.Label, IsCurrentMixin):
+    class ColorLabel(Tkinter.Label, IsCurrentMixin):
         def __init__(self, *args, **kargs):
-            tkinter.Label.__init__(self, *args, **kargs)
+            Tkinter.Label.__init__(self, *args, **kargs)
             IsCurrentMixin.__init__(self)
 
-    class ColorOptionMenu(tkinter.OptionMenu, IsCurrentActiveMixin):
+    class ColorOptionMenu(Tkinter.OptionMenu, IsCurrentActiveMixin):
         def __init__(self, *args, **kargs):
-            tkinter.OptionMenu.__init__(self, *args, **kargs)
+            Tkinter.OptionMenu.__init__(self, *args, **kargs)
             IsCurrentActiveMixin.__init__(self)
 
     def setIsCurrent(*args):
@@ -261,14 +261,14 @@ if __name__ == "__main__":
         for wdg in wdgSet:
             wdg.setIsCurrent(isCurrent)
     
-    isCurrentVar = tkinter.BooleanVar()
+    isCurrentVar = Tkinter.BooleanVar()
     isCurrentVar.set(True)
     isCurrentVar.trace_variable("w", setIsCurrent)
 
-    stateVar = tkinter.StringVar()
+    stateVar = Tkinter.StringVar()
     stateVar.set("Normal")
     
-    entryVar = tkinter.StringVar()
+    entryVar = Tkinter.StringVar()
     entryVar.set("Entry")
     wdgSet = (
         ColorCheckbutton(root,
@@ -292,6 +292,6 @@ if __name__ == "__main__":
         ),
     )
     for wdg in wdgSet:
-        wdg.pack(fill=tkinter.X)
+        wdg.pack(fill=Tkinter.X)
             
     root.mainloop()

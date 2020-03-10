@@ -33,13 +33,13 @@ __all__ = ['ProgressBar', 'TimeBar']
 import time
 import RO.SeqUtil
 from RO.TkUtil import Timer
-import tkinter
+import Tkinter
 from . import Button
 from . import Entry
 from .Gridder import Gridder
 from .Label import Label, StrLabel
 
-class ProgressBar (tkinter.Frame):
+class ProgressBar (Tkinter.Frame):
     """A bar graph showing a value or fraction of a task performed.
     
     Contains three widgets:
@@ -95,7 +95,7 @@ class ProgressBar (tkinter.Frame):
         helpURL = None,
     **kargs):
         # handle defaults for background, borderwidth and relief
-        e = tkinter.Entry()
+        e = Tkinter.Entry()
         for item in ("background", "borderwidth", "relief"):
             kargs.setdefault(item, e[item])
         
@@ -103,7 +103,7 @@ class ProgressBar (tkinter.Frame):
         for item in ("selectborderwidth", "highlightthickness"):
             kargs.setdefault(item, 0)
 
-        tkinter.Frame.__init__(self, master)
+        Tkinter.Frame.__init__(self, master)
 
         # basics
         self.constrainValue = constrainValue
@@ -149,7 +149,7 @@ class ProgressBar (tkinter.Frame):
             self.labelWdg.pack(side = packSide)
         
         # create canvas for bar graph
-        self.cnv = tkinter.Canvas(self,
+        self.cnv = Tkinter.Canvas(self,
             width = cnvWidth,
             height = cnvHeight,
         **kargs)
@@ -317,7 +317,7 @@ class ProgressBar (tkinter.Frame):
         """
         if wdgInfo is None:
             return wdgInfo
-        elif isinstance(wdgInfo, tkinter.Widget):
+        elif isinstance(wdgInfo, Tkinter.Widget):
             # a widget; assume it's a Label widget of some kind
             return wdgInfo
         
@@ -325,7 +325,7 @@ class ProgressBar (tkinter.Frame):
         # set up the keyword arguments
         kargs.setdefault("helpText", self.helpText)
         kargs.setdefault("helpURL", self.helpURL)
-        if isinstance(wdgInfo, tkinter.Variable):
+        if isinstance(wdgInfo, Tkinter.Variable):
             kargs["textvariable"] = wdgInfo
         else:
             kargs["text"] = wdgInfo

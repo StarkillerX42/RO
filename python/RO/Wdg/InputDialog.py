@@ -26,11 +26,11 @@ History:
 """
 __all__ = ['ModalDialogBase']
 
-import tkinter
+import Tkinter
 
 from . import Button
 
-class ModalDialogBase(tkinter.Toplevel):
+class ModalDialogBase(Tkinter.Toplevel):
     """Base class for modal dialogs.
     
     The result is returned in self.result
@@ -41,7 +41,7 @@ class ModalDialogBase(tkinter.Toplevel):
     def __init__(self, master = None, title = None):
         """Create and display a modal dialog.
         """
-        tkinter.Toplevel.__init__(self, master)
+        Tkinter.Toplevel.__init__(self, master)
         self.resizable(False, False)
 
         if title:
@@ -49,16 +49,16 @@ class ModalDialogBase(tkinter.Toplevel):
 
         self.result = None
         
-        self.doneVar = tkinter.BooleanVar()
+        self.doneVar = Tkinter.BooleanVar()
         
         # widget that had focus before this dialog opened
         self.prevFocus = self.focus_get() or master
         
-        buttonFrame = tkinter.Frame(self)
+        buttonFrame = Tkinter.Frame(self)
         self.buttons(master = buttonFrame)
         buttonFrame.pack(side="bottom")
 
-        bodyFrame = tkinter.Frame(self)
+        bodyFrame = Tkinter.Frame(self)
         # create dialog body and save widget that should
         # initially get focus in this dialog
         self.initialFocus = self.body(master = bodyFrame)
@@ -78,18 +78,18 @@ class ModalDialogBase(tkinter.Toplevel):
         # it's just a best-effort attempt to grab (make the dialog box modal).
         try:
             self.wait_visibility()
-        except tkinter.TclError:
+        except Tkinter.TclError:
             pass
         try:
             self.grab_set()
-        except tkinter.TclError:
+        except Tkinter.TclError:
             pass
 
         self.wait_variable(self.doneVar)
 
         try:
             self.grab_release()
-        except tkinter.TclError:
+        except Tkinter.TclError:
             pass
 
         if self.prevFocus:
@@ -152,11 +152,11 @@ if __name__ == "__main__":
     class TestDialog(ModalDialogBase):
         def body(self, master):
     
-            tkinter.Label(master, text="Name:").grid(row=0)
-            tkinter.Label(master, text="Password:").grid(row=1)
+            Tkinter.Label(master, text="Name:").grid(row=0)
+            Tkinter.Label(master, text="Password:").grid(row=1)
     
-            self.e1 = tkinter.Entry(master)
-            self.e2 = tkinter.Entry(master, show="*")
+            self.e1 = Tkinter.Entry(master)
+            self.e2 = Tkinter.Entry(master, show="*")
     
             self.e1.grid(row=0, column=1)
             self.e2.grid(row=1, column=1)
@@ -172,12 +172,12 @@ if __name__ == "__main__":
         l["text"] = "Result: %s" % (d.result,)
         print(d.result)
             
-    root = tkinter.Tk()
-    e = tkinter.Entry(root)
+    root = Tkinter.Tk()
+    e = Tkinter.Entry(root)
     e.pack()
-    l = tkinter.Label(root)
+    l = Tkinter.Label(root)
     l.pack()
-    b = tkinter.Button(root, text="Dialog", command=doDialog)
+    b = Tkinter.Button(root, text="Dialog", command=doDialog)
     b.pack()
     e.focus_set()
 

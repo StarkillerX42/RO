@@ -47,7 +47,7 @@ History:
 """
 __all__ = ['CtxMenu', 'CtxMenuMixin', 'addCtxMenu']
 
-import tkinter
+import Tkinter
 import RO.Comm.BrowseURL
 import RO.Constants
 import RO.OS
@@ -126,7 +126,7 @@ class CtxMenu(object):
         Override to build your own menu from scratch.
         If you only want to add some entries, override ctxConfigMenu instead.
         """
-        menu = tkinter.Menu(master=self.__getWdg(), tearoff=0)
+        menu = Tkinter.Menu(master=self.__getWdg(), tearoff=0)
         if self.__configMenuFunc(menu):
             helpURL = self.getHelpURL()
             if helpURL:
@@ -215,7 +215,7 @@ if __name__ == "__main__":
     Bindings.stdBindings(root)
 
     # add help to a standard Tkinter widget
-    stdLabel = tkinter.Label(text="Standard label")
+    stdLabel = Tkinter.Label(text="Standard label")
     addCtxMenu(
         wdg = stdLabel,
         helpURL = "http://brokenURL.html",
@@ -223,9 +223,9 @@ if __name__ == "__main__":
     stdLabel.pack()
     
     # create a new label class that automatically has help:
-    class HelpLabel(tkinter.Label, CtxMenuMixin):
+    class HelpLabel(Tkinter.Label, CtxMenuMixin):
         def __init__(self, master, helpURL=None, **kargs):
-            tkinter.Label.__init__(self, master=master, **kargs)
+            Tkinter.Label.__init__(self, master=master, **kargs)
             CtxMenuMixin.__init__(self, helpURL)
 
     hLabel = HelpLabel(root,

@@ -111,33 +111,33 @@ class SeveritySelectMixin(SeverityMixin):
 
 
 if __name__ == "__main__":
-    import tkinter
+    import Tkinter
     from . import PythonTk
     root = PythonTk.PythonTk()
     
-    class ColorButton(tkinter.Button, SeverityActiveMixin):
+    class ColorButton(Tkinter.Button, SeverityActiveMixin):
         def __init__(self, *args, **kargs):
-            tkinter.Button.__init__(self, *args, **kargs)
+            Tkinter.Button.__init__(self, *args, **kargs)
             SeverityActiveMixin.__init__(self)
 
-    class ColorCheckbutton(tkinter.Checkbutton, SeverityActiveMixin):
+    class ColorCheckbutton(Tkinter.Checkbutton, SeverityActiveMixin):
         def __init__(self, *args, **kargs):
-            tkinter.Checkbutton.__init__(self, *args, **kargs)
+            Tkinter.Checkbutton.__init__(self, *args, **kargs)
             SeverityActiveMixin.__init__(self)
 
-    class ColorEntry(tkinter.Entry, SeveritySelectMixin):
+    class ColorEntry(Tkinter.Entry, SeveritySelectMixin):
         def __init__(self, *args, **kargs):
-            tkinter.Entry.__init__(self, *args, **kargs)
+            Tkinter.Entry.__init__(self, *args, **kargs)
             SeveritySelectMixin.__init__(self)
 
-    class ColorLabel(tkinter.Label, SeverityMixin):
+    class ColorLabel(Tkinter.Label, SeverityMixin):
         def __init__(self, *args, **kargs):
-            tkinter.Label.__init__(self, *args, **kargs)
+            Tkinter.Label.__init__(self, *args, **kargs)
             SeverityMixin.__init__(self)
 
-    class ColorOptionMenu(tkinter.OptionMenu, SeverityActiveMixin):
+    class ColorOptionMenu(Tkinter.OptionMenu, SeverityActiveMixin):
         def __init__(self, *args, **kargs):
-            tkinter.OptionMenu.__init__(self, *args, **kargs)
+            Tkinter.OptionMenu.__init__(self, *args, **kargs)
             SeverityActiveMixin.__init__(self)
         
     def setSeverity(*args):
@@ -150,11 +150,11 @@ if __name__ == "__main__":
         for wdg in wdgSet:
             wdg.setSeverity(severity)
 
-    severityVar = tkinter.StringVar()
+    severityVar = Tkinter.StringVar()
     severityVar.set("Normal")
     severityVar.trace_variable("w", setSeverity)
     
-    entryVar = tkinter.StringVar()
+    entryVar = Tkinter.StringVar()
     entryVar.set("Entry")
     wdgSet = (
         ColorOptionMenu(root, severityVar, "Normal", "Warning", "Error",
@@ -177,6 +177,6 @@ if __name__ == "__main__":
         ),
     )
     for wdg in wdgSet:
-        wdg.pack(fill=tkinter.X)
+        wdg.pack(fill=Tkinter.X)
             
     root.mainloop()

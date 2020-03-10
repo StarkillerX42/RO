@@ -58,7 +58,7 @@ import sys
 import traceback
 import weakref
 from . import Bindings
-import tkinter
+import Tkinter
 import RO.AddCallback
 import RO.Constants
 import RO.MathUtil
@@ -100,7 +100,7 @@ class FTPCallback(object):
         self.callFunc = None
     
 
-class FTPLogWdg(tkinter.Frame):
+class FTPLogWdg(Tkinter.Frame):
     """A widget to initiate file get via ftp, to display the status
     of the transfer and to allow users to abort the transfer.
     
@@ -121,7 +121,7 @@ class FTPLogWdg(tkinter.Frame):
         maxLines = 500,
         helpURL = None,
     **kargs):
-        tkinter.Frame.__init__(self, master = master, **kargs)
+        Tkinter.Frame.__init__(self, master = master, **kargs)
         self._memDebugDict = {}
         
         self.maxLines = maxLines
@@ -133,11 +133,11 @@ class FTPLogWdg(tkinter.Frame):
 
         self._timer = Timer()
         
-        self.yscroll = tkinter.Scrollbar (
+        self.yscroll = Tkinter.Scrollbar (
             master = self,
             orient = "vertical",
         )
-        self.text = tkinter.Text (
+        self.text = Tkinter.Text (
             master = self,
             yscrollcommand = self.yscroll.set,
             wrap = "none",
@@ -158,7 +158,7 @@ class FTPLogWdg(tkinter.Frame):
         self.rowconfigure(0, weight=1)
         self.columnconfigure(0, weight=1)
         
-        detFrame = tkinter.Frame(self)
+        detFrame = Tkinter.Frame(self)
             
         gr = RO.Wdg.Gridder(detFrame, sticky="ew")
         
@@ -455,9 +455,9 @@ if __name__ == "__main__":
     testFrame.grid(row=row, column=0, columnspan=2, sticky="nsew")
     row += 1
 
-    overwriteVar = tkinter.BooleanVar()
+    overwriteVar = Tkinter.BooleanVar()
     overwriteVar.set(True)
-    overwriteWdg = tkinter.Checkbutton(
+    overwriteWdg = Tkinter.Checkbutton(
         master=root,
         text="Overwrite",
         variable=overwriteVar,
@@ -465,14 +465,14 @@ if __name__ == "__main__":
     overwriteWdg.grid(row=row, column=1, sticky="w")
     row += 1
 
-    tkinter.Label(root, text="ToPath:").grid(row=row, column=0, sticky="e")
-    toPathWdg = tkinter.Entry(root)
+    Tkinter.Label(root, text="ToPath:").grid(row=row, column=0, sticky="e")
+    toPathWdg = Tkinter.Entry(root)
     toPathWdg.insert(0, "tempfile")
     toPathWdg.grid(row=row, column=1, sticky="ew")
     row += 1
     
-    tkinter.Label(root, text="FromURL:").grid(row=row, column=0, sticky="e")
-    fromURLWdg = tkinter.Entry(root)
+    Tkinter.Label(root, text="FromURL:").grid(row=row, column=0, sticky="e")
+    fromURLWdg = Tkinter.Entry(root)
     fromURLWdg.grid(row=row, column=1, sticky="ew")
     row += 1
 

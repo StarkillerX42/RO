@@ -26,11 +26,11 @@ History:
 """
 __all__ = ['PythonTk']
 
-import tkinter
+import Tkinter
 from . import Bindings
 from . import PythonWdg
 
-class PythonTk (tkinter.Tk):
+class PythonTk (Tkinter.Tk):
     """Creates a Tkinter application with standard menus and such"""
     def __init__(self, **kargs):
         """Creates a new application with some standard menus and such
@@ -54,7 +54,7 @@ class PythonTk (tkinter.Tk):
             del(kargs["optionfile"])
 
         # basic initialization
-        tkinter.Tk.__init__(self, **kargs)
+        Tkinter.Tk.__init__(self, **kargs)
         
         # if the user supplied an option file, load it
         if optionfile:
@@ -64,11 +64,11 @@ class PythonTk (tkinter.Tk):
                 print("cannot read option file; error:", e)
         
         # create and display a Python script window
-        self.pyToplevel = tkinter.Toplevel()
+        self.pyToplevel = Tkinter.Toplevel()
         self.pyToplevel.geometry("+0+450")
         self.pyToplevel.title("Python")
         pyFrame = PythonWdg.PythonWdg(self.pyToplevel)
-        pyFrame.pack(expand=tkinter.YES, fill=tkinter.BOTH)
+        pyFrame.pack(expand=Tkinter.YES, fill=Tkinter.BOTH)
         
         # set up standard bindings
         Bindings.stdBindings(self)
@@ -76,12 +76,12 @@ class PythonTk (tkinter.Tk):
 
 if __name__ == "__main__":
     root = PythonTk()
-    aText = tkinter.Text(root, width=30, height=2)
-    aText.insert(tkinter.END, "some text to manipulate")
-    aText.grid(row=0, column=0, sticky=tkinter.NSEW)
-    anEntry = tkinter.Entry(root)
+    aText = Tkinter.Text(root, width=30, height=2)
+    aText.insert(Tkinter.END, "some text to manipulate")
+    aText.grid(row=0, column=0, sticky=Tkinter.NSEW)
+    anEntry = Tkinter.Entry(root)
     anEntry.insert(0, "more text")
-    anEntry.grid(row=1, column=0, sticky=tkinter.EW)
+    anEntry.grid(row=1, column=0, sticky=Tkinter.EW)
     root.grid_rowconfigure(0, weight=1)
     root.grid_columnconfigure(0, weight=1)
     root.mainloop()

@@ -27,14 +27,14 @@ History:
 __all__ = ["DirWdg", "FileWdg"]
 
 import os
-import tkinter
-import tkinter.filedialog
+import Tkinter
+import Tkinter.filedialog
 import RO.AddCallback
 import RO.Constants
 from .CtxMenu import CtxMenu, CtxMenuMixin
 from .SeverityMixin import SeverityActiveMixin
 
-class BasePathWdg (tkinter.Button, RO.AddCallback.BaseMixin, CtxMenuMixin,
+class BasePathWdg (Tkinter.Button, RO.AddCallback.BaseMixin, CtxMenuMixin,
     SeverityActiveMixin):
     def __init__(self,
         master,
@@ -72,7 +72,7 @@ class BasePathWdg (tkinter.Button, RO.AddCallback.BaseMixin, CtxMenuMixin,
         self.leftChar = 0
         self.rightChar = (self.maxChar - self.leftChar) - 1
 
-        tkinter.Button.__init__(self,
+        Tkinter.Button.__init__(self,
             master = master,
             command = self._doChoose,
         **kargs)
@@ -124,16 +124,16 @@ class BasePathWdg (tkinter.Button, RO.AddCallback.BaseMixin, CtxMenuMixin,
         Warning: if you want the state to be "active" you must set that explicitly.
         """
         if doEnable:
-            self["state"] = tkinter.NORMAL
+            self["state"] = Tkinter.NORMAL
         else:
-            self["state"] = tkinter.DISABLED
+            self["state"] = Tkinter.DISABLED
     
     def getEnable(self):
         """Return True if widget is enabled, False otherwise
 
         Enabled is defined as the state is not "disabled" (thus "enabled" or "active").
         """
-        return self["state"] != tkinter.DISABLED
+        return self["state"] != Tkinter.DISABLED
         
     def setPath(self, path):
         """Set self.path to normalized version of path.
@@ -223,7 +223,7 @@ class DirWdg(BasePathWdg):
         kargs = {}
         if self.fileTypes:
             kargs["filetypes"] = self.fileTypes
-        newPath = tkinter.filedialog.askdirectory(
+        newPath = Tkinter.filedialog.askdirectory(
             initialdir = startDir,
             mustexist = True,
             title = self.helpText,
@@ -268,7 +268,7 @@ class FileWdg(BasePathWdg):
         kargs = {}
         if self.fileTypes:
             kargs["filetypes"] = self.fileTypes
-        newPath = tkinter.filedialog.askopenfilename(
+        newPath = Tkinter.filedialog.askopenfilename(
             initialdir = startDir,
             initialfile = startFile,
             title = self.helpText,

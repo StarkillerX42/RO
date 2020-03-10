@@ -65,7 +65,7 @@ History:
 __all__ = ['StatusBar']
 
 import sys
-import tkinter
+import Tkinter
 import RO.Alg
 import RO.Constants
 import RO.KeyVariable
@@ -88,7 +88,7 @@ def _getSound(playCmdSounds, prefs, prefName):
     return soundPref        
 
 
-class StatusBar(tkinter.Frame):
+class StatusBar(Tkinter.Frame):
     """Display hot help and error messages and execute commands
     and display their progress.
 
@@ -124,7 +124,7 @@ class StatusBar(tkinter.Frame):
         self.cmdFailedSound = _getSound(playCmdSounds, prefs, "Command Failed")
         self.tempIDGen = RO.Alg.IDGen(1, sys.maxsize)
         
-        tkinter.Frame.__init__(self, master, **kargs)
+        Tkinter.Frame.__init__(self, master, **kargs)
         self.displayWdg = Entry.StrEntry(
             master = self,
             readOnly = True,

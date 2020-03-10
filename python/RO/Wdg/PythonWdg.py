@@ -41,13 +41,13 @@ __all__ = ['PythonWdg']
 
 import os
 import re
-import tkinter
-import tkinter.filedialog
+import Tkinter
+import Tkinter.filedialog
 import RO.CnvUtil
 import RO.OS
 from . import Text
 
-class PythonWdg(tkinter.Frame):
+class PythonWdg(Tkinter.Frame):
     """A frame containing text window into which you may enter Python code.
     
     Inputs:
@@ -60,7 +60,7 @@ class PythonWdg(tkinter.Frame):
         filePath = None,
         helpURL = None,
     **kargs):
-        tkinter.Frame.__init__(self, master, **kargs)
+        Tkinter.Frame.__init__(self, master, **kargs)
 
         self.master=master
         self.filePath = filePath
@@ -71,39 +71,39 @@ class PythonWdg(tkinter.Frame):
             height = 10,
             helpURL = helpURL
         )
-        self.inputWdg.grid(row=0, column=0, sticky=tkinter.NSEW)
+        self.inputWdg.grid(row=0, column=0, sticky=Tkinter.NSEW)
         self.inputWdg.bind("<Key-Escape>", self.run)
 
-        self.scroll = tkinter.Scrollbar(self, command=self.inputWdg.yview)
+        self.scroll = Tkinter.Scrollbar(self, command=self.inputWdg.yview)
         self.inputWdg.configure(yscrollcommand=self.scroll.set)
-        self.scroll.grid(row=0, column=1, sticky=tkinter.NS)
+        self.scroll.grid(row=0, column=1, sticky=Tkinter.NS)
 
         if self.filePath:
             fd = RO.OS.openUniv(self.filePath)
             try:
-                self.inputWdg.delete(1.0, tkinter.END)
+                self.inputWdg.delete(1.0, Tkinter.END)
                 for line in fd.readlines():
-                    self.inputWdg.insert(tkinter.END, line)
+                    self.inputWdg.insert(Tkinter.END, line)
             finally:
                 fd.close()
 
-        self.cmdbar = tkinter.Frame(self, borderwidth=2, relief=tkinter.SUNKEN)
-        self.open = tkinter.Button(self.cmdbar, text='Open...', command=self.open)
-        self.open.pack(side=tkinter.LEFT, expand=0, padx=3, pady=3)
-        self.save = tkinter.Button(self.cmdbar, text='Save...', command=self.save)
-        self.save.pack(side=tkinter.LEFT, expand=0, padx=3, pady=3)
-        self.clr  = tkinter.Button(self.cmdbar, text='Clear', command=self.clr)
-        self.clr.pack(side=tkinter.LEFT, expand=0, padx=3, pady=3)
-        self.run  =tkinter.Button(self.cmdbar, text='Run', command=self.run)
-        self.run.pack(side=tkinter.RIGHT, expand=0, padx=3, pady=3)
-        self.cmdbar.grid(row=1, column=0, columnspan=2, sticky=tkinter.EW)
+        self.cmdbar = Tkinter.Frame(self, borderwidth=2, relief=Tkinter.SUNKEN)
+        self.open = Tkinter.Button(self.cmdbar, text='Open...', command=self.open)
+        self.open.pack(side=Tkinter.LEFT, expand=0, padx=3, pady=3)
+        self.save = Tkinter.Button(self.cmdbar, text='Save...', command=self.save)
+        self.save.pack(side=Tkinter.LEFT, expand=0, padx=3, pady=3)
+        self.clr  = Tkinter.Button(self.cmdbar, text='Clear', command=self.clr)
+        self.clr.pack(side=Tkinter.LEFT, expand=0, padx=3, pady=3)
+        self.run  =Tkinter.Button(self.cmdbar, text='Run', command=self.run)
+        self.run.pack(side=Tkinter.RIGHT, expand=0, padx=3, pady=3)
+        self.cmdbar.grid(row=1, column=0, columnspan=2, sticky=Tkinter.EW)
 
         self.grid_rowconfigure(0, weight=1)
         self.grid_columnconfigure(0, weight=1)
         self.inputWdg.focus_set()
 
     def run(self, evt=None, globs=None, locs=None):
-        script = self.inputWdg.get(1.0, tkinter.END)
+        script = self.inputWdg.get(1.0, Tkinter.END)
 
         # replace x = Tk() with x = Toplevel()
         tkPat = re.compile(r"^(.*=\s*)(:?ROStd)?Tk\(\)(.*)$", re.MULTILINE)
@@ -121,23 +121,23 @@ class PythonWdg(tkinter.Frame):
         exec(script, globs, locs)
 
     def open(self):
-        filePath = tkinter.filedialog.askopenfilename()
+        filePath = Tkinter.filedialog.askopenfilename()
         if not filePath:
             return
         filePath = RO.CnvUtil.asStr(filePath)
-        top = tkinter.Toplevel(self.master, )
+        top = Tkinter.Toplevel(self.master, )
         top.title(os.path.basename(filePath))
         frame = PythonWdg(top, filePath=filePath)
-        frame.pack(expand=tkinter.YES, fill=tkinter.BOTH)
+        frame.pack(expand=Tkinter.YES, fill=Tkinter.BOTH)
 
     def save(self, forPrt=None):
-        script = self.inputWdg.get(1.0, tkinter.END)
+        script = self.inputWdg.get(1.0, Tkinter.END)
         if not script:
             return
         if forPrt:
             filePath = 'prt.tmp'
         else:
-            filePath = tkinter.filedialog.asksaveasfilename(initialfile=self.filePath)
+            filePath = Tkinter.filedialog.asksaveasfilename(initialfile=self.filePath)
             if not filePath:
                 return
             self.filePath = RO.CnvUtil.asStr(filePath)
@@ -152,10 +152,10 @@ class PythonWdg(tkinter.Frame):
 
 
 if __name__ == '__main__':
-    root = tkinter.Tk()
+    root = Tkinter.Tk()
     
     testFrame = PythonWdg(root)
     root.geometry("+0+450")
-    testFrame.pack(expand=tkinter.YES, fill=tkinter.BOTH)
+    testFrame.pack(expand=Tkinter.YES, fill=Tkinter.BOTH)
 
     root.mainloop()

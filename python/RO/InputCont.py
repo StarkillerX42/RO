@@ -914,7 +914,7 @@ class ContList(WdgCont):
 
 
 if __name__ == "__main__":
-    import tkinter
+    import Tkinter
     import RO.Wdg
     root = RO.Wdg.PythonTk()
     
@@ -946,22 +946,22 @@ if __name__ == "__main__":
         doEnable = enableVar.get()
         cList.setEnable(doEnable)
     
-    hideVar = tkinter.IntVar()
+    hideVar = Tkinter.IntVar()
     hideVar.set(False)
     hideVar.trace_variable('w', doHide)
-    hideButton = tkinter.Checkbutton (root, variable=hideVar, text='hide')
+    hideButton = Tkinter.Checkbutton (root, variable=hideVar, text='hide')
     hideButton.pack()
     
-    enableVar = tkinter.IntVar()
+    enableVar = Tkinter.IntVar()
     enableVar.set(1)
     enableVar.trace_variable('w', setEnable)
-    enableButton = tkinter.Checkbutton (root, variable=enableVar, text='Enable')
+    enableButton = Tkinter.Checkbutton (root, variable=enableVar, text='Enable')
     enableButton.pack()
     
-    getButton = tkinter.Button (root, command=printOptions, text='Print Options')
+    getButton = Tkinter.Button (root, command=printOptions, text='Print Options')
     getButton.pack()
     
-    wdgFrame = tkinter.Frame(root)
+    wdgFrame = Tkinter.Frame(root)
     
     conts = (
         WdgCont (
@@ -995,10 +995,10 @@ if __name__ == "__main__":
         callFunc = printCallback,
     )
     
-    clearButton = tkinter.Button (root, command=cList.clear, text='Clear')
+    clearButton = Tkinter.Button (root, command=cList.clear, text='Clear')
     clearButton.pack()
     
-    defButton = tkinter.Button (root, command=cList.restoreDefault, text='Default')
+    defButton = Tkinter.Button (root, command=cList.restoreDefault, text='Default')
     defButton.pack()
     
     flatWdgList = cList.getWdgList()

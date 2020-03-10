@@ -70,7 +70,7 @@ History:
 """
 __all__ = ['LogWdg']
 
-import tkinter
+import Tkinter
 import RO.Alg
 from . import Text
 
@@ -81,7 +81,7 @@ _SevTagDict = RO.Alg.OrderedDict(
 _SevTagListDict = RO.Alg.OrderedDict(
     (sev, list(_SevTagDict.values())[ind:]) for ind, sev in enumerate(_SevTagDict.keys()))
 
-class LogWdg(tkinter.Frame):
+class LogWdg(Tkinter.Frame):
 
     def __init__(self,
         master,
@@ -106,12 +106,12 @@ class LogWdg(tkinter.Frame):
             (if already at end of text) by default.
         - **kargs: additional keyword arguments for Frame
         """
-        tkinter.Frame.__init__(self, master=master, **kargs)
+        Tkinter.Frame.__init__(self, master=master, **kargs)
         
         self.maxLineIndex = maxLines + 1
         self.doAutoScroll = bool(doAutoScroll)
         
-        self.yscroll = tkinter.Scrollbar (
+        self.yscroll = Tkinter.Scrollbar (
             master = self,
             orient = "vertical",
         )
@@ -143,7 +143,7 @@ class LogWdg(tkinter.Frame):
                 continue
             pref.addCallback(RO.Alg.GenericCallback(self._updSevTagColor, sevTag), callNow=True)
         
-        self.findCountVar = tkinter.IntVar()
+        self.findCountVar = Tkinter.IntVar()
 
         self.rowconfigure(1, weight=1)
         self.columnconfigure(0, weight=1)
@@ -518,7 +518,7 @@ if __name__ == '__main__':
 
     severityList = list(RO.Constants.SevNameDict.keys())
     
-    entry = tkinter.Entry(root)
+    entry = Tkinter.Entry(root)
     entry.grid(row=1, column=0, sticky="nsew")
     
     def addMsg(msgStr):

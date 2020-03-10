@@ -81,13 +81,13 @@ import datetime
 import time
 
 import numpy
-import tkinter
+import Tkinter
 import matplotlib
 import matplotlib.dates
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from RO.TkUtil import Timer
 
-class StripChartWdg(tkinter.Frame):
+class StripChartWdg(Tkinter.Frame):
     """A widget to changing values in real time as a strip chart
     
     Usage Hints:
@@ -141,7 +141,7 @@ class StripChartWdg(tkinter.Frame):
         - cnvTimeFunc: a function that takes a POSIX timestamp (e.g. time.time()) and returns matplotlib days;
             typically an instance of TimeConverter; defaults to TimeConverter(useUTC=False)
         """
-        tkinter.Frame.__init__(self, master)
+        Tkinter.Frame.__init__(self, master)
         
         self._timeRange = timeRange
         self._isVisible = self.winfo_ismapped()
@@ -484,7 +484,7 @@ class TimeConverter(object):
 
 if __name__ == "__main__":   
     import RO.Alg
-    root = tkinter.Tk()
+    root = Tkinter.Tk()
     stripChart = StripChartWdg(
         master = root,
         timeRange = 60,
@@ -530,10 +530,10 @@ if __name__ == "__main__":
     
     def deleteSatConstLine():
         stripChart.removeLine(satConstLine)
-    tkinter.Button(root, text="Delete Saturated Counts", command=deleteSatConstLine).pack()
+    Tkinter.Button(root, text="Delete Saturated Counts", command=deleteSatConstLine).pack()
 
     def deleteWalk1():
         stripChart.removeLine(walk1Line)
-    tkinter.Button(root, text="Delete Walk 1", command=deleteWalk1).pack()
+    Tkinter.Button(root, text="Delete Walk 1", command=deleteWalk1).pack()
 
     root.mainloop()

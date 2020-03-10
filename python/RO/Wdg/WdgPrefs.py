@@ -22,7 +22,7 @@ History:
 """
 __all__ = []
 
-import tkinter
+import Tkinter
 import RO.Constants
 import RO.TkUtil
 import RO.Prefs.PrefVar
@@ -118,7 +118,7 @@ class WdgPrefs(object):
     """
     def __init__(self, prefSet = None):
         # use a widget that has the activebackground attribute
-        self._tkWdg = tkinter.Button()
+        self._tkWdg = Tkinter.Button()
         self.prefDict = {}
         self._activeBackScale = 1.0
 

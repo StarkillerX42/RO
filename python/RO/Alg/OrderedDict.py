@@ -37,160 +37,163 @@ History:
 """
 __all__ = ["OrderedDict", "ReverseOrderedDict"]
 
-class OrderedDict(dict):
-    """A dictionary in which the order of adding items is preserved.
-    Replacing an existing item replaces it at its current location.
+# class OrderedDict(dict):
+#     """A dictionary in which the order of adding items is preserved.
+#     Replacing an existing item replaces it at its current location.
+#
+#     Inputs:
+#     - seqOrDict: a sequence of (key, value) tuples or a dictionary
+#     """
+#     def __init__(self, seqOrDict=None):
+#         dict.__init__(self)
+#         self.__keyList = []
+#         if seqOrDict is None:
+#             return
+#         elif hasattr(seqOrDict, "iteritems"):
+#             for key, val in seqOrDict.items():
+#                 self[key] = val
+#         else:
+#             for key, val in seqOrDict:
+#                 self[key] = val
+#
+#     def clear(self):
+#         self.__keyList = []
+#         dict.clear(self)
+#
+#     def copy(self):
+#         return self.__class__(self)
+#
+#     def iterkeys(self):
+#         return iter(self.__keyList)
+#
+#     def itervalues(self):
+#         for key in self.keys():
+#             yield self[key]
+#
+#     def iteritems(self):
+#         for key in self:
+#             yield (key, self[key])
+#
+#     def index(self, key):
+#         """Return the index of key.
+#         Raise KeyError if not found.
+#         """
+#         try:
+#             return self.__keyList.index(key)
+#         except ValueError:
+#             raise KeyError("key=%r not in %s" % (key, self.__class__.__name__))
+#
+#     def insert(self, ind, key, value):
+#         """Insert a key, value pair before the specified index.
+#         If the key already exists, it is NOT moved but its value is updated.
+#         ind >= len appends to the end (like list.index).
+#         """
+#         if key not in self:
+#             self.__keyList.insert(ind, key)
+#         dict.__setitem__(self, key, value)
+#
+#     def keys(self):
+#         return self.__keyList[:]
+#
+#     def pop(self, key):
+#         val = self[key]
+#         self.__delitem__(key)
+#         return val
+#
+#     def popitem(self, i=-1):
+#         """Remove the ith item from the dictionary (the last item if i is omitted)
+#         and returns (key, value). This emulates list.pop() instead of dict.popitem(),
+#         since ordered dictionaries have a defined order.
+#         """
+#         key = self.__keyList[i]
+#         item = (key, self[key])
+#         self.__delitem__(key)
+#         return item
+#
+#     def setdefault(self, key, value):
+#         if key not in self:
+#             self[key] = value
+#         return self[key]
+#
+#     def sort(self, cmpFunc=None):
+#         """Sort the keys.
+#         """
+#         self.__keyList.sort(cmpFunc)
+#
+#     def update(self, aDict):
+#         """Add all items from dictionary aDict to self (in order if aDict is an ordered dictionary).
+#         """
+#         for key, value in aDict.items():
+#             self[key] = value
+#
+#     def values(self):
+#         return [self[key] for key in self.keys()]
+#
+#     def _checkIntegrity(self):
+#         """Perform an internal consistency check and raise an AssertionError if anything is wrong.
+#
+#         In principal a bug could lead to the system getting out of synch, hence this method.
+#         """
+#         assert len(self) == len(self.__keyList), \
+#             "length of dict %r != length of key list %r" % (len(self), len(self.__keyList))
+#         for key in self.keys():
+#             assert key in self, \
+#                 "key %r in key list missing from dictionary" % (key,)
+#
+#     def __delitem__(self, key):
+#         dict.__delitem__(self, key)
+#         self.__keyList.remove(key)
+#
+#     def __iter__(self):
+#         return iter(self.keys())
+#
+#     def __repr__(self):
+#         return "%s([%s])" % (self.__class__.__name__, ', '.join(["(%r, %r)" % item for item in self.items()]))
+#
+#     def __str__(self):
+#         return "{%s}" % (', '.join(["(%r, %r)" % item for item in self.items()]),)
+#
+#     def __setitem__(self, key, value):
+#         if key not in self:
+#             self.__keyList.append(key)
+#         dict.__setitem__(self, key, value)
 
-    Inputs:
-    - seqOrDict: a sequence of (key, value) tuples or a dictionary
-    """
-    def __init__(self, seqOrDict=None):
-        dict.__init__(self)
-        self.__keyList = []
-        if seqOrDict is None:
-            return
-        elif hasattr(seqOrDict, "iteritems"):
-            for key, val in seqOrDict.items():
-                self[key] = val
-        else:
-            for key, val in seqOrDict:
-                self[key] = val
-    
-    def clear(self):
-        self.__keyList = []
-        dict.clear(self)
-        
-    def copy(self):
-        return self.__class__(self)
-        
-    def iterkeys(self):
-        return iter(self.__keyList)
-    
-    def itervalues(self):
-        for key in self.keys():
-            yield self[key]
-    
-    def iteritems(self):
-        for key in self:
-            yield (key, self[key])
-    
-    def index(self, key):
-        """Return the index of key.
-        Raise KeyError if not found.
-        """
-        try:
-            return self.__keyList.index(key)
-        except ValueError:
-            raise KeyError("key=%r not in %s" % (key, self.__class__.__name__))
-        
-    def insert(self, ind, key, value):
-        """Insert a key, value pair before the specified index.
-        If the key already exists, it is NOT moved but its value is updated.
-        ind >= len appends to the end (like list.index).
-        """
-        if key not in self:
-            self.__keyList.insert(ind, key)
-        dict.__setitem__(self, key, value)
-    
-    def keys(self):
-        return self.__keyList[:]
-    
-    def pop(self, key):
-        val = self[key]
-        self.__delitem__(key)
-        return val
-    
-    def popitem(self, i=-1):
-        """Remove the ith item from the dictionary (the last item if i is omitted)
-        and returns (key, value). This emulates list.pop() instead of dict.popitem(),
-        since ordered dictionaries have a defined order.
-        """
-        key = self.__keyList[i]
-        item = (key, self[key])
-        self.__delitem__(key)
-        return item
-    
-    def setdefault(self, key, value):
-        if key not in self:
-            self[key] = value
-        return self[key]
-    
-    def sort(self, cmpFunc=None):
-        """Sort the keys.
-        """
-        self.__keyList.sort(cmpFunc)
-    
-    def update(self, aDict):
-        """Add all items from dictionary aDict to self (in order if aDict is an ordered dictionary).
-        """
-        for key, value in aDict.items():
-            self[key] = value
- 
-    def values(self):
-        return [self[key] for key in self.keys()]
-    
-    def _checkIntegrity(self):
-        """Perform an internal consistency check and raise an AssertionError if anything is wrong.
-        
-        In principal a bug could lead to the system getting out of synch, hence this method.
-        """
-        assert len(self) == len(self.__keyList), \
-            "length of dict %r != length of key list %r" % (len(self), len(self.__keyList))
-        for key in self.keys():
-            assert key in self, \
-                "key %r in key list missing from dictionary" % (key,)
-    
-    def __delitem__(self, key):
-        dict.__delitem__(self, key)
-        self.__keyList.remove(key)
-    
-    def __iter__(self):
-        return iter(self.keys())
-    
-    def __repr__(self):
-        return "%s([%s])" % (self.__class__.__name__, ', '.join(["(%r, %r)" % item for item in self.items()]))
 
-    def __str__(self):
-        return "{%s}" % (', '.join(["(%r, %r)" % item for item in self.items()]),)
-    
-    def __setitem__(self, key, value):
-        if key not in self:
-            self.__keyList.append(key)
-        dict.__setitem__(self, key, value)
+# class ReverseOrderedDict(OrderedDict):
+#     """An ordered dictionary in which each new item is stored at the front.
+#     Replacing an existing item replaces it at its current location.
+#
+#     Inputs:
+#     - seqOrDict: a sequence of (key, value) tuples or a dictionary
+#
+#     Note: the data from seqOrDict will be reversed in the dict
+#     because seqOrDict is read in normal left-to-right order
+#     and each new entry goes at the beginning of the dict. Thus
+#     ReverseOrderedDict([(1, "a"), (2, "b")]) stores keys in order 2, 1.
+#
+#     This has one nasty side effect: repr() shows the items
+#     in the reverse order in which they are stored internally.
+#     This is because it shows the call needed to recreate the dict.
+#     str() has no such issues. Thus str() and repr() show the data
+#     in opposite order. str() is generally what you want to see.
+#     """
+#     def __setitem__(self, key, value):
+#         if key not in self:
+#             self._OrderedDict__keyList.insert(0, key)
+#         dict.__setitem__(self, key, value)
+#
+#     def copy(self):
+#         revCopy = self.__class__(self)
+#         revCopy._OrderedDict__keyList.reverse()
+#         return revCopy
+#
+#     def __repr__(self):
+#         descrList = ["(%r, %r)" % item for item in self.items()]
+#         descrList.reverse()
+#         return "%s([%s])" % (self.__class__.__name__, ', '.join(descrList))
+OrderedDict = dict
+ReverseOrderedDict = dict
 
-
-class ReverseOrderedDict(OrderedDict):
-    """An ordered dictionary in which each new item is stored at the front.
-    Replacing an existing item replaces it at its current location.
-
-    Inputs:
-    - seqOrDict: a sequence of (key, value) tuples or a dictionary
-
-    Note: the data from seqOrDict will be reversed in the dict
-    because seqOrDict is read in normal left-to-right order
-    and each new entry goes at the beginning of the dict. Thus
-    ReverseOrderedDict([(1, "a"), (2, "b")]) stores keys in order 2, 1.
-    
-    This has one nasty side effect: repr() shows the items
-    in the reverse order in which they are stored internally.
-    This is because it shows the call needed to recreate the dict.
-    str() has no such issues. Thus str() and repr() show the data
-    in opposite order. str() is generally what you want to see.
-    """
-    def __setitem__(self, key, value):
-        if key not in self:
-            self._OrderedDict__keyList.insert(0, key)
-        dict.__setitem__(self, key, value)
-    
-    def copy(self):
-        revCopy = self.__class__(self)
-        revCopy._OrderedDict__keyList.reverse()
-        return revCopy
-    
-    def __repr__(self):
-        descrList = ["(%r, %r)" % item for item in self.items()]
-        descrList.reverse()
-        return "%s([%s])" % (self.__class__.__name__, ', '.join(descrList))
 
 if __name__ == "__main__":
     print("testing OrderedDict")
@@ -228,7 +231,7 @@ if __name__ == "__main__":
         actKeyValues = [kv for kv in theDict.items()]
         assert desKeyValues == actKeyValues, "iteritems() failed; values %r != %r" % (desKeyValues, actKeyValues)
     
-        theDict._checkIntegrity()   
+        # theDict._checkIntegrity()
 
     
     def keyToValue(key):
@@ -282,5 +285,5 @@ if __name__ == "__main__":
     # add a new item to dictCopy and make sure the integrity of both are preserved
     # (verifies that the __keyList lists in each dictionary are separate entities)
     dictCopy[()] = "value for ()"
-    dictCopy._checkIntegrity()
-    oDict._checkIntegrity()
+    # dictCopy._checkIntegrity()
+    # oDict._checkIntegrity()

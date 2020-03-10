@@ -175,7 +175,7 @@ History:
 __all__ = ["ann_Circle", "ann_Plus", "ann_X", "ann_Line", "ann_Text", "MaskInfo", "GrayImageWdg"]
 
 import weakref
-import tkinter
+import Tkinter
 import math
 import numpy
 try:
@@ -272,7 +272,7 @@ class MaskInfo(object):
         self.wdg = None
 
         if not self.tkWdg:
-            self.tkWdg = tkinter.Frame()
+            self.tkWdg = Tkinter.Frame()
 
         self.setColor(color)
 
@@ -414,7 +414,7 @@ class Annotation(object):
         """
         self.gim.cnv.delete(self.idTag)
 
-class GrayImageWdg(tkinter.Frame, RO.AddCallback.BaseMixin):
+class GrayImageWdg(Tkinter.Frame, RO.AddCallback.BaseMixin):
     """Display a grayscale image.
 
     Inputs:
@@ -440,7 +440,7 @@ class GrayImageWdg(tkinter.Frame, RO.AddCallback.BaseMixin):
         callFunc = None,
         defRange = "99.9%",
     **kargs):
-        tkinter.Frame.__init__(self, master, **kargs)
+        Tkinter.Frame.__init__(self, master, **kargs)
         RO.AddCallback.BaseMixin.__init__(self)
         if defRange not in self._RangeMenuItems:
             raise RuntimeError("invalid defRange")
@@ -497,7 +497,7 @@ class GrayImageWdg(tkinter.Frame, RO.AddCallback.BaseMixin):
         self._memDebugDict = {}
 
         # tool bar
-        toolFrame = tkinter.Frame(self)
+        toolFrame = Tkinter.Frame(self)
 
         self.scaleMenuWdg = OptionMenu.OptionMenu(
             master = toolFrame,
@@ -575,7 +575,7 @@ class GrayImageWdg(tkinter.Frame, RO.AddCallback.BaseMixin):
         self.toolFrame = toolFrame
 
         # add current position and current value widgets
-        posFrame = tkinter.Frame(self)
+        posFrame = Tkinter.Frame(self)
         StrLabel(
             posFrame,
             text = " Cursor Pos: ",
@@ -630,13 +630,13 @@ class GrayImageWdg(tkinter.Frame, RO.AddCallback.BaseMixin):
         posFrame.pack(side="bottom", anchor="nw")
 
         # set up scrolling panel to display canvas and error messages
-        self.scrollFrame = tkinter.Frame(self, height=height, width=width) #, borderwidth=2, relief="sunken")
+        self.scrollFrame = Tkinter.Frame(self, height=height, width=width) #, borderwidth=2, relief="sunken")
         self.scrollFrame.grid_propagate(False)
         self.strMsgWdg = StrLabel(self.scrollFrame)
         self.strMsgWdg.grid(row=0, column=0)
         self.strMsgWdg.grid_remove()
 
-        self.hsb = tkinter.Scrollbar(
+        self.hsb = Tkinter.Scrollbar(
             self.scrollFrame,
             orient="horizontal",
             width = 10,
@@ -646,7 +646,7 @@ class GrayImageWdg(tkinter.Frame, RO.AddCallback.BaseMixin):
         self._hscrollbar = self.hsb
         self.hsb.set(0.0, 1.0)
 
-        self.vsb = tkinter.Scrollbar(
+        self.vsb = Tkinter.Scrollbar(
             self.scrollFrame,
             orient="vertical",
             width = 10,
@@ -655,7 +655,7 @@ class GrayImageWdg(tkinter.Frame, RO.AddCallback.BaseMixin):
         self.vsb.grid(row=0, column=1, sticky="ns")
         self.vsb.set(0.0, 1.0)
 
-        self.cnv = tkinter.Canvas(
+        self.cnv = Tkinter.Canvas(
             master = self.scrollFrame,
 #           cursor="tcross",
             bd = 0,

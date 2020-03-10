@@ -16,7 +16,7 @@ History:
 """
 __all__ = ['Text']
 
-import tkinter
+import Tkinter
 
 import RO.CnvUtil
 import RO.MathUtil
@@ -26,7 +26,7 @@ from . import WdgPrefs
 from .CtxMenu import CtxMenuMixin
 
 
-class Text (tkinter.Text, CtxMenuMixin):
+class Text (Tkinter.Text, CtxMenuMixin):
     """Text widget
 
     Inputs:
@@ -55,7 +55,7 @@ class Text (tkinter.Text, CtxMenuMixin):
         self._readOnly = readOnly
         self._isCurrent = bool(isCurrent)
         
-        tkinter.Text.__init__(self, master, **kargs)
+        Tkinter.Text.__init__(self, master, **kargs)
 
         CtxMenuMixin.__init__(self, helpURL = helpURL)
 
@@ -94,7 +94,7 @@ class Text (tkinter.Text, CtxMenuMixin):
         dataPresent = (self.get("1.0", "3.0") not in ("\n", ""))
         try:
             selPresent = (self.get("sel.first", "sel.last") != "")
-        except tkinter.TclError:
+        except Tkinter.TclError:
             selPresent = False
         if self._readOnly or not self.getEnable():
             menu.add_command(
@@ -106,7 +106,7 @@ class Text (tkinter.Text, CtxMenuMixin):
 
         try:
             clipPresent = (self.selection_get(selection="CLIPBOARD") != "")
-        except tkinter.TclError:
+        except Tkinter.TclError:
             clipPresent = False
 
         menu.add_command(
@@ -160,7 +160,7 @@ class Text (tkinter.Text, CtxMenuMixin):
         """Returns False if the state is disabled,
         True otherwise (state is normal or active)
         """
-        return self["state"] != tkinter.DISABLED
+        return self["state"] != Tkinter.DISABLED
     
     def getIsCurrent(self):
         """Return True if value is current, False otherwise.

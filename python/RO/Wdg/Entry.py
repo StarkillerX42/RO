@@ -165,7 +165,7 @@ __all__ = ['StrEntry', 'ASCIIEntry', 'FloatEntry', 'IntEntry', 'DMSEntry']
 
 #import os
 import re
-import tkinter
+import Tkinter
 import RO.AddCallback
 import RO.CnvUtil
 import RO.SeqUtil
@@ -176,7 +176,7 @@ from .CtxMenu import CtxMenuMixin
 from .IsCurrentMixin import AutoIsCurrentMixin, IsCurrentMixin
 from .SeverityMixin import SeveritySelectMixin
 
-class _BaseEntry (tkinter.Entry, RO.AddCallback.BaseMixin,
+class _BaseEntry (Tkinter.Entry, RO.AddCallback.BaseMixin,
     AutoIsCurrentMixin, IsCurrentMixin, SeveritySelectMixin, CtxMenuMixin):
     """Base class for RO.Wdg entry widgets.
     
@@ -269,7 +269,7 @@ class _BaseEntry (tkinter.Entry, RO.AddCallback.BaseMixin,
     **kargs):
         self.defValueStr = "" # just create the field for now
         if var is None:
-            var = tkinter.StringVar()   
+            var = Tkinter.StringVar()   
         self.var = var
         self.label = label
         self.helpText = helpText
@@ -306,7 +306,7 @@ class _BaseEntry (tkinter.Entry, RO.AddCallback.BaseMixin,
             del(kargs["text"])
         kargs["textvariable"] = self.var  # overrides user attempt to set
         
-        tkinter.Entry.__init__(self, master, **kargs)
+        Tkinter.Entry.__init__(self, master, **kargs)
         
         self.currStrVal = ""
         self.var.trace_variable("w", self._checkVar)
@@ -399,7 +399,7 @@ class _BaseEntry (tkinter.Entry, RO.AddCallback.BaseMixin,
 
         try:
             clipPresent = (self.selection_get(selection="CLIPBOARD") != "")
-        except tkinter.TclError:
+        except Tkinter.TclError:
             clipPresent = False
 
         if self._clearMenuName:
@@ -471,7 +471,7 @@ class _BaseEntry (tkinter.Entry, RO.AddCallback.BaseMixin,
         """Returns False if the state is disabled,
         True otherwise (state is normal or active)
         """
-        return self["state"] != tkinter.DISABLED
+        return self["state"] != Tkinter.DISABLED
 
     def getEntryError(self):
         """Returns the current validation error.
@@ -1492,7 +1492,7 @@ class DMSEntry (_NumEntry):
             currVal = self.var.get()
             # try to select the previous field
             if self.selection_present():
-                ind = self.index(tkinter.SEL_FIRST) - 1
+                ind = self.index(Tkinter.SEL_FIRST) - 1
             else:
                 ind = self.index("insert") - 1
             (leftInd, rightInd) = RO.StringUtil.findLeftNumber(currVal, ind)
@@ -1505,7 +1505,7 @@ class DMSEntry (_NumEntry):
             # try to select the next digit
             currVal = self.var.get()
             if self.selection_present():
-                ind = self.index(tkinter.SEL_LAST)
+                ind = self.index(Tkinter.SEL_LAST)
             else:
                 ind = self.index("insert")
             (leftInd, rightInd) = RO.StringUtil.findRightNumber(currVal, ind)
@@ -1531,10 +1531,10 @@ if __name__ == "__main__":
             return "%r" % (entry.getString(),)
     
     def addEntry(descr, entry, unitsLabel=None):
-        newFrame = tkinter.Frame(root)
+        newFrame = Tkinter.Frame(root)
         newFrame.lower()
         if descr:
-            tkinter.Label(newFrame, text=descr).pack(side="left")
+            Tkinter.Label(newFrame, text=descr).pack(side="left")
         entry.pack(in_=newFrame, side="left")
         if unitsLabel:
             unitsLabel.pack(in_=newFrame, side="left")
@@ -1571,16 +1571,16 @@ if __name__ == "__main__":
             if isinstance(entry, DMSEntry):
                 entry.setIsHours(False)
 
-    getButton = tkinter.Button (root, command=doPrint, text="Print Values")
+    getButton = Tkinter.Button (root, command=doPrint, text="Print Values")
     getButton.pack()
     
-    defButton = tkinter.Button (root, command=doDefault, text="Default")
+    defButton = Tkinter.Button (root, command=doDefault, text="Default")
     defButton.pack()
     
-    hrsButton = tkinter.Button (root, command=setHours, text="DMS in hrs")
+    hrsButton = Tkinter.Button (root, command=setHours, text="DMS in hrs")
     hrsButton.pack()
     
-    degButton = tkinter.Button (root, command=setDeg, text="DMS in deg")
+    degButton = Tkinter.Button (root, command=setDeg, text="DMS in deg")
     degButton.pack()
     
     statusBar = StatusBar.StatusBar(root)
@@ -1646,7 +1646,7 @@ if __name__ == "__main__":
     )
     
     
-    absUnitsVar = tkinter.StringVar()
+    absUnitsVar = Tkinter.StringVar()
     addEntry (
         "Abs DMSEntry -90-90 deg",
         DMSEntry(root,
@@ -1655,10 +1655,10 @@ if __name__ == "__main__":
             unitsVar=absUnitsVar,
             helpText = "d:m:s in the range -90-90",
         ),
-        tkinter.Label(root, textvar=absUnitsVar, width=5),
+        Tkinter.Label(root, textvar=absUnitsVar, width=5),
     )
     
-    abs2UnitsVar = tkinter.StringVar()
+    abs2UnitsVar = Tkinter.StringVar()
     addEntry (
         "Abs DMSEntry 25-180 deg",
         DMSEntry(root,
@@ -1668,10 +1668,10 @@ if __name__ == "__main__":
             helpText = "d:m:s in the range 25-180",
             clearMenu = None,
         ),
-        tkinter.Label(root, textvar=abs2UnitsVar, width=5),
+        Tkinter.Label(root, textvar=abs2UnitsVar, width=5),
     )
     
-    relUnitsVar = tkinter.StringVar()
+    relUnitsVar = Tkinter.StringVar()
     addEntry (
         "Rel DMSEntry -90-90 sec",
         DMSEntry(root,
@@ -1684,10 +1684,10 @@ if __name__ == "__main__":
             minMenu = "Minimum",
             maxMenu = "Maximum",
         ),
-        tkinter.Label(root, textvar=relUnitsVar, width=5),
+        Tkinter.Label(root, textvar=relUnitsVar, width=5),
     )
     
-    rel2UnitsVar = tkinter.StringVar()
+    rel2UnitsVar = Tkinter.StringVar()
     addEntry (
         "Rel DMSEntry 0-180 sec",
         DMSEntry(root,
@@ -1700,7 +1700,7 @@ if __name__ == "__main__":
             minMenu = "Minimum",
             maxMenu = "Maximum",
         ),
-        tkinter.Label(root, textvar=rel2UnitsVar, width=5),
+        Tkinter.Label(root, textvar=rel2UnitsVar, width=5),
     )
     
     statusBar.pack(side="top", expand="yes", fill="x")

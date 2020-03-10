@@ -20,11 +20,11 @@ History:
 """
 __all__ = ['HistoryMenu']
 
-import tkinter
+import Tkinter
 import RO.Alg
 from .CtxMenu import CtxMenu, CtxMenuMixin
 
-class HistoryMenu (tkinter.Menubutton, CtxMenuMixin):
+class HistoryMenu (Tkinter.Menubutton, CtxMenuMixin):
     """A menu showing a history of recent events.
     
     Inputs:
@@ -50,7 +50,7 @@ class HistoryMenu (tkinter.Menubutton, CtxMenuMixin):
         helpText = None,
         helpURL = None,
     ):
-        tkinter.Menubutton.__init__(self,
+        Tkinter.Menubutton.__init__(self,
             master=master,
             text="History",
             indicatoron=1,
@@ -66,7 +66,7 @@ class HistoryMenu (tkinter.Menubutton, CtxMenuMixin):
         self.helpText = helpText
 
         # basic menu
-        self.__menu = tkinter.Menu(self, tearoff=0)
+        self.__menu = Tkinter.Menu(self, tearoff=0)
         self["menu"] = self.__menu
     
         self.dataDict = {}
@@ -127,9 +127,9 @@ if __name__ == "__main__":
     def doPrint(name, data):
         print("name=%r, data=%r" % (name, data))
     
-    tkinter.Label(root, text="Name of new entry (type <CR> to accept it):").pack()
-    nameVar = tkinter.StringVar()
-    nameWdg = tkinter.Entry(root, textvariable=nameVar)
+    Tkinter.Label(root, text="Name of new entry (type <CR> to accept it):").pack()
+    nameVar = Tkinter.StringVar()
+    nameWdg = Tkinter.Entry(root, textvariable=nameVar)
     nameWdg.bind("<Return>", doAdd)
     nameWdg.pack()
     testFrame = HistoryMenu(root,

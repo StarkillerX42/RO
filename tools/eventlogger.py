@@ -8,12 +8,12 @@ Based on code in John Grayson's "Python and Tkinter Programming"
 """
 import sys
 import os
-import tkinter
+import Tkinter
 RORoot = os.path.join(os.path.dirname(os.path.abspath(os.path.dirname(__file__))), "python")
 sys.path.append(RORoot)
 import RO.Wdg
 
-class EventLogger(tkinter.Frame):
+class EventLogger(Tkinter.Frame):
     EventDict = {
          '2': 'KeyPress',
          '3': 'KeyRelease',
@@ -40,13 +40,13 @@ class EventLogger(tkinter.Frame):
     }
 
     def __init__(self, master):
-        tkinter.Frame.__init__(self, master)
+        Tkinter.Frame.__init__(self, master)
         # dict of event type: event name
         
         self.eventInd = 0
         
-        self.userLabel = tkinter.Label(self, text="Type here:")
-        self.userEntry  = tkinter.Entry(self, highlightthickness=2)
+        self.userLabel = Tkinter.Label(self, text="Type here:")
+        self.userEntry  = Tkinter.Entry(self, highlightthickness=2)
         self.logWdg = RO.Wdg.LogWdg(self)
         
         for eventName in list(self.EventDict.values()):
@@ -102,7 +102,7 @@ class EventLogger(tkinter.Frame):
             
 
 if __name__ == "__main__":
-    root = tkinter.Tk()
+    root = Tkinter.Tk()
     root.geometry("800x500")
     root.wm_title("Event Logger")
     evtLogger = EventLogger(root)

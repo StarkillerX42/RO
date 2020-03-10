@@ -13,7 +13,7 @@ History:
 __all__ = ["InputContPresetsWdg"]
 
 import functools
-import tkinter
+import Tkinter
 
 import RO.TkUtil
 from . import Entry
@@ -84,9 +84,9 @@ class InputContPresetsWdg(Menubutton.Menubutton):
         }
         wdgKArgs.update(kwargs)
         Menubutton.Menubutton.__init__(self, master, helpText=helpText, helpURL=helpURL, **wdgKArgs)
-        self._menu = tkinter.Menu(self, tearoff=False)
+        self._menu = Tkinter.Menu(self, tearoff=False)
 
-        editMenu = tkinter.Menu(
+        editMenu = Tkinter.Menu(
             self._menu,
             tearoff = False,
         )
@@ -383,7 +383,7 @@ if __name__ == '__main__':
     from .Gridder import Gridder
     from .InputContFrame import InputContFrame
 
-    root = tkinter.Tk()
+    root = Tkinter.Tk()
     root.geometry("200x200")
     userPresetsDict = SavedDict("testPreset.json")
 

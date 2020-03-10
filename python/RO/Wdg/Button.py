@@ -21,14 +21,14 @@ History:
 """
 __all__ = ['Button', 'Radiobutton']
 
-import tkinter
+import Tkinter
 import RO.AddCallback
 import RO.Constants
 import RO.TkUtil
 from .CtxMenu import CtxMenu, CtxMenuMixin
 from .SeverityMixin import SeverityActiveMixin
 
-class Button(tkinter.Button, RO.AddCallback.TkButtonMixin, CtxMenuMixin, SeverityActiveMixin):
+class Button(Tkinter.Button, RO.AddCallback.TkButtonMixin, CtxMenuMixin, SeverityActiveMixin):
     def __init__(self,
         master,
         helpText = None,
@@ -58,7 +58,7 @@ class Button(tkinter.Button, RO.AddCallback.TkButtonMixin, CtxMenuMixin, Severit
                 kwArgs.setdefault("padx", 10)
                 kwArgs.setdefault("pady", 3)
 
-        tkinter.Button.__init__(self, master = master, **kwArgs)
+        Tkinter.Button.__init__(self, master = master, **kwArgs)
         
         RO.AddCallback.TkButtonMixin.__init__(self,
             callFunc = callFunc,
@@ -78,19 +78,19 @@ class Button(tkinter.Button, RO.AddCallback.TkButtonMixin, CtxMenuMixin, Severit
         Warning: if you want the state to be "active" you must set that explicitly.
         """
         if doEnable:
-            self["state"] = tkinter.NORMAL
+            self["state"] = Tkinter.NORMAL
         else:
-            self["state"] = tkinter.DISABLED
+            self["state"] = Tkinter.DISABLED
     
     def getEnable(self):
         """Return True if widget is enabled, False otherwise
 
         Enabled is defined as the state is not "disabled" (thus "enabled" or "active").
         """
-        return self["state"] != tkinter.DISABLED
+        return self["state"] != Tkinter.DISABLED
 
 
-class Radiobutton(tkinter.Radiobutton, CtxMenuMixin, SeverityActiveMixin):
+class Radiobutton(Tkinter.Radiobutton, CtxMenuMixin, SeverityActiveMixin):
     def __init__(self,
         master,
         helpText = None,
@@ -107,7 +107,7 @@ class Radiobutton(tkinter.Radiobutton, CtxMenuMixin, SeverityActiveMixin):
         """
         self.helpText = helpText
 
-        tkinter.Radiobutton.__init__(self, master = master, **kwArgs)
+        Tkinter.Radiobutton.__init__(self, master = master, **kwArgs)
         CtxMenuMixin.__init__(self, helpURL = helpURL)
         SeverityActiveMixin.__init__(self, severity)
     

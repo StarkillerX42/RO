@@ -198,8 +198,8 @@ class NullConnection(TCPConnection):
 
 
 if __name__ == "__main__":
-    import tkinter
-    root = tkinter.Tk()
+    import Tkinter
+    root = Tkinter.Tk()
 
     host = "tccdev"
     username = "TCC"
@@ -220,16 +220,16 @@ if __name__ == "__main__":
         stateCallback = stateCallback,
     )
 
-    sendText = tkinter.Entry(root)
-    sendText.pack(fill=tkinter.X, expand=tkinter.YES)
+    sendText = Tkinter.Entry(root)
+    sendText.pack(fill=Tkinter.X, expand=Tkinter.YES)
     sendText.focus_set()
 
-    tkinter.Button(root, text="Disconnect", command=myConn.disconnect).pack()   
+    Tkinter.Button(root, text="Disconnect", command=myConn.disconnect).pack()   
 
     def sendCmd (evt):
         try:
             astr = sendText.get()
-            sendText.delete(0, tkinter.END)
+            sendText.delete(0, Tkinter.END)
             myConn.writeLine(astr)
         except Exception as e:
             sys.stderr.write ("Could not extract or send: %s\n" % (astr))
